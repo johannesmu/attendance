@@ -5,6 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { LoginPage } from '../pages/login/login';
+import { SignoutPage } from '../pages/signout/signout';
+import { SignupPage } from '../pages/signup/signup';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -24,7 +27,10 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { title: 'List', component: ListPage },
+      { title: 'Login', component: LoginPage },
+      { title: 'Sign up', component: SignupPage },
+      { title: 'Sign out', component: SignoutPage }
     ];
 
   }
@@ -41,11 +47,20 @@ export class MyApp {
         (user) => {
           if(user){
             //user is authenticated
-            this.rootPage = ListPage;
+            this.rootPage = HomePage;
+            this.pages = [
+              { title: 'Home', component: HomePage },
+              { title: 'List', component: ListPage },
+              { title: 'Sign out', component: SignoutPage }
+            ];
           }
           else{
             //user is not authenticated
-            this.rootPage = HomePage;
+            this.rootPage = LoginPage;
+            this.pages = [
+              { title: 'Login', component: LoginPage },
+              { title: 'Sign up', component: SignupPage }
+            ];
           }
         }
       );
