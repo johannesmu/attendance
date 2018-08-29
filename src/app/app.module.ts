@@ -20,6 +20,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { environment } from '../environments/environment';
 import { AuthProvider } from '../providers/auth/auth';
+import { DataProvider } from '../providers/data/data';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { AuthProvider } from '../providers/auth/auth';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvider
+    AuthProvider,
+    DataProvider
   ]
 })
 export class AppModule {}

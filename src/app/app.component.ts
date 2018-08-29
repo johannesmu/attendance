@@ -19,6 +19,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
+  user:any;
 
   pages: Array<{title: string, component: any}>;
 
@@ -48,7 +49,11 @@ export class MyApp {
         (user) => {
           if(user){
             //user is authenticated
+            //display the username
+            console.log(user);
+            this.user = user;
             this.rootPage = HomePage;
+            //change navigation to show the following:
             this.pages = [
               { title: 'Home', component: HomePage },
               { title: 'Classes', component: ClassesPage },
@@ -60,6 +65,7 @@ export class MyApp {
           else{
             //user is not authenticated
             this.rootPage = LoginPage;
+            //change navigation to show the following:
             this.pages = [
               { title: 'Login', component: LoginPage },
               { title: 'Sign up', component: SignupPage }

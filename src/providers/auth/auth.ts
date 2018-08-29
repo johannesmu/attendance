@@ -26,7 +26,7 @@ export class AuthProvider {
   }
   public signUp(username,email,password){
     this.afAuth.auth.createUserWithEmailAndPassword(email,password)
-    .then( (user) => {
+    .then( function(user){
       this.updateUserProfile(user,username,'');
       console.log(user);
     })
