@@ -8,20 +8,21 @@
 </ion-header>
 
 <ion-content padding>
+  <h2>Today</h2>
+  <ion-badge padding color="dark">Today is {{now}}</ion-badge>
+  <h2>Upcoming</h2>
   <ion-list>
     <ion-item>
-      <h3>Sign up</h3>
+      Intro to Web B
+      <ion-badge item-end padding color="light">Thu 30/08/2018</ion-badge>
     </ion-item>
     <ion-item>
-      <ion-label floating>Email</ion-label>
-      <ion-input type="email" required [(ngModel)] = "email"></ion-input>
+      Intro to Web A
+      <ion-badge item-end padding color="light">Thu 31/08/2018</ion-badge>
     </ion-item>
     <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input type="password" required [(ngModel)] = "password"></ion-input>
-    </ion-item>
-    <ion-item>
-      <button ion-button (click) = "signUp()">Sign Up</button>
+      Intro to Web A
+      <ion-badge item-end padding color="light">Thu 31/08/2018</ion-badge>
     </ion-item>
   </ion-list>
 </ion-content>

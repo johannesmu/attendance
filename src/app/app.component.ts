@@ -8,6 +8,7 @@ import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { SignoutPage } from '../pages/signout/signout';
 import { SignupPage } from '../pages/signup/signup';
+import { ClassesPage } from '../pages/classes/classes';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -50,8 +51,10 @@ export class MyApp {
             this.rootPage = HomePage;
             this.pages = [
               { title: 'Home', component: HomePage },
+              { title: 'Classes', component: ClassesPage },
               { title: 'List', component: ListPage },
               { title: 'Sign out', component: SignoutPage }
+
             ];
           }
           else{

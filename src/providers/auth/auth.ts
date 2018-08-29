@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -11,7 +11,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 @Injectable()
 export class AuthProvider {
   public user:any;
-  constructor(public http: HttpClient, public afAuth:AngularFireAuth) {
+  constructor(public afAuth:AngularFireAuth) {
     this.observeStatus();
   }
   public observeStatus(){
@@ -28,10 +28,14 @@ export class AuthProvider {
     this.afAuth.auth.createUserWithEmailAndPassword(email,password)
     .then( (user) => {
       this.updateUserProfile(user,username,'');
+      console.log(user);
     })
     .catch( (error) =>{
       //handle errors
     });
+  }
+  public signOut(){
+    this.afAuth.auth.signOut();
   }
   private updateUserProfile(user,username,url){
     //set user displayName
@@ -46,7 +50,9 @@ export class AuthProvider {
       //handle error
     });
   }
-  public signIn(){
-
+  public signIn(email,password){
+    this.afAuth.auth.signInWithEmailAndPassword(email,password)
+    .then( (user) => { console.log(user) })
+    .catch( (error) => { console.log(error) });
   }
 }

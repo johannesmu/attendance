@@ -13,15 +13,14 @@ export class HomePage {
   private email:string;
   private password:string;
   public user:any;
-  constructor(public navCtrl: NavController, public afAuth:AngularFireAuth ) {
+  public now:string;
 
-  }
-  signUp(){
-    console.log( this.email, this.password );
-    this.afAuth.auth.createUserWithEmailAndPassword(this.email,this.password)
-    .then((result) => {
-        this.user = result;
-        // this.navCtrl.push( ListPage );
-     });
+  constructor(public navCtrl: NavController, public afAuth:AngularFireAuth ) {
+    //set todays date
+    let date = new Date();
+    let month = date.getMonth();
+    let day = date.getDay();
+    let year = date.getFullYear();
+    this.now = day + '/' + month + '/' + year;
   }
 }
