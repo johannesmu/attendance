@@ -10,22 +10,41 @@ import { AngularFireAuth } from 'angularfire2/auth';
 */
 @Injectable()
 export class AuthProvider {
-  public authState:any
+  public user:any;
   constructor(public http: HttpClient, public afAuth:AngularFireAuth) {
     this.observeStatus();
   }
   public observeStatus(){
     this.afAuth.authState.subscribe( (user) => {
       if( user ){
-        this.authState = user;
+        this.user = user;
       }
       else{
-        this.authState = null;
+        this.user = null;
       }
     });
   }
-  public signUp(){
-
+  public signUp(username,email,password){
+    this.afAuth.auth.createUserWithEmailAndPassword(email,password)
+    .then( (user) => {
+      this.updateUserProfile(user,username,'');
+    })
+    .catch( (error) =>{
+      //handle errors
+    });
+  }
+  private updateUserProfile(user,username,url){
+    //set user displayName
+    user.updateProfile({
+      displayName: username,
+      photoURL: url
+    })
+    .then( () => {
+      this.user.displayName = username;
+    })
+    .catch( (error) =>{
+      //handle error
+    });
   }
   public signIn(){
 

@@ -15,6 +15,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../environments/environment';
 import { AuthProvider } from '../providers/auth/auth';
@@ -33,7 +34,8 @@ import { AuthProvider } from '../providers/auth/auth';
     AngularFireModule.initializeApp(environment.firebase),
     IonicModule.forRoot(MyApp),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    HttpClient
   ],
   bootstrap: [IonicApp],
   entryComponents: [
