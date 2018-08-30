@@ -36,11 +36,12 @@ export class AuthProvider {
   public signOut(){
     this.afAuth.auth.signOut();
   }
-  updateUserProfile(username){
+  updateUserProfile(username:string){
     this.afAuth.authState.subscribe( (user) => {
       if( user ){
         user.updateProfile({
-          displayName: username
+          displayName: username,
+          photoURL: ''
         });
         console.log(user);
       }

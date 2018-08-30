@@ -15,34 +15,32 @@
 
 
 <ion-content padding>
-  <ion-list>
-    <ion-item>
-      <h3>Sign up for a free account</h3>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Username</ion-label>
-      <ion-input type="text" required [(ngModel)] = "username"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Email</ion-label>
-      <ion-input type="email" required [(ngModel)] = "email"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input type="password" required [(ngModel)] = "password"></ion-input>
-    </ion-item>
-    <ion-item>
-      <button padding ion-button color="dark" block round outline (click) = "signUp()">
-        Sign up for free
-      </button>
-    </ion-item>
-    <ion-item>
+  <form>
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Username</ion-label>
+        <ion-input type="text" required [(ngModel)] = "username" name="username"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="email" required [(ngModel)] = "email" name="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" required [(ngModel)] = "password" name="password"></ion-input>
+      </ion-item>
+      <ion-item no-lines>
+        <button padding ion-button color="dark" block round outline (click) = "signUp()">
+          Sign up for free
+        </button>
+      </ion-item>
+    </ion-list>
+  </form>
+  <div class="error">
       {{error}}
-    </ion-item>
-    <ion-item>
-      <button padding ion-button clear block (click) = "goToLogin()">
-        Sign into your account instead
-      </button>
-    </ion-item>
-  </ion-list>
+  </div>
+  <button padding ion-button clear block (click) = "goToLogin()">
+    Sign into your account instead
+  </button>
+
 </ion-content>

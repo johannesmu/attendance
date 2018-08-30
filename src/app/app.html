@@ -6,8 +6,10 @@
   </ion-header>
 
   <ion-content>
-    <p *ngIf="this.displayName">{{this.displayName}}</p>
     <ion-list>
+      <ion-item *ngIf="displayName !== null" no-lines>
+        {{displayName}}
+      </ion-item>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>

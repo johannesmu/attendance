@@ -10,11 +10,16 @@ import { DataProvider } from '../../providers/data/data';
 })
 export class ClassesPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private dataService:DataProvider ) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private dataService:DataProvider ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClassesPage');
   }
-
+  getClasses(){
+    this.dataService;
+  }
 }
