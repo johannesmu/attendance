@@ -6,8 +6,7 @@
   </ion-header>
 
   <ion-content>
-    <p *ngIf="this.user">{{user.displayName}}</p>
-    <p>Hello</p>
+    <p *ngIf="this.displayName">{{this.displayName}}</p>
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}

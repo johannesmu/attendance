@@ -12,6 +12,7 @@ import { SignupPage } from '../signup/signup';
 export class LoginPage {
   private email:string;
   private password:string;
+  private username: string;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,

@@ -20,6 +20,7 @@ export class MyApp {
 
   rootPage: any = HomePage;
   user:any;
+  displayName:string;
 
   pages: Array<{title: string, component: any}>;
 
@@ -50,8 +51,8 @@ export class MyApp {
           if(user){
             //user is authenticated
             //display the username
-            console.log(user);
             this.user = user;
+            this.displayName = user.displayName;
             this.rootPage = HomePage;
             //change navigation to show the following:
             this.pages = [
@@ -64,7 +65,7 @@ export class MyApp {
           }
           else{
             //user is not authenticated
-            this.rootPage = LoginPage;
+            this.rootPage = SignupPage;
             //change navigation to show the following:
             this.pages = [
               { title: 'Login', component: LoginPage },

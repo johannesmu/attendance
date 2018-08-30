@@ -1,6 +1,8 @@
 
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Observable } from 'rxjs/Observable';
+import { from } from 'rxjs';
 
 /*
   Generated class for the AuthProvider provider.
@@ -11,6 +13,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 @Injectable()
 export class AuthProvider {
   public user:any;
+  public displayName:string;
   constructor(public afAuth:AngularFireAuth) {
     this.observeStatus();
   }
@@ -18,6 +21,7 @@ export class AuthProvider {
     this.afAuth.authState.subscribe( (user) => {
       if( user ){
         this.user = user;
+        this.displayName = ( user.displayName ) ? user.displayName : '';
       }
       else{
         this.user = null;
@@ -26,28 +30,20 @@ export class AuthProvider {
   }
   public signUp(username,email,password){
     this.afAuth.auth.createUserWithEmailAndPassword(email,password)
-    .then( function(user){
-      this.updateUserProfile(user,username,'');
-      console.log(user);
-    })
-    .catch( (error) =>{
-      //handle errors
-    });
+    .catch((error) => { return error });
+    this.updateUserProfile(username);
   }
   public signOut(){
     this.afAuth.auth.signOut();
   }
-  private updateUserProfile(user,username,url){
-    //set user displayName
-    user.updateProfile({
-      displayName: username,
-      photoURL: url
-    })
-    .then( () => {
-      this.user.displayName = username;
-    })
-    .catch( (error) =>{
-      //handle error
+  updateUserProfile(username){
+    this.afAuth.authState.subscribe( (user) => {
+      if( user ){
+        user.updateProfile({
+          displayName: username
+        });
+        console.log(user);
+      }
     });
   }
   public signIn(email,password){
