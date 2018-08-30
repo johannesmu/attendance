@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 export class DataProvider {
   classes: Observable<any[]>;
   classesref:string;
+  public classList:Array<any>;
   constructor( public afdb:AngularFireDatabase ) {
     this.classesref = 'classes';
     this.getClasses();
@@ -14,16 +15,15 @@ export class DataProvider {
   getClasses(){
     let itemRef = this.afdb.object(this.classesref);
     itemRef.snapshotChanges().subscribe( (action) => {
-      console.log(action.type);
-      console.log(action.key);
-      console.log(action.payload.val())
+      this.unwrapClasses(action.payload.val());
     });
   }
-  unwrapClasses(){
-    this.classes.subscribe( ( classes ) => {
+  unwrapClasses( classes ){
       let count = Object.keys(classes).length;
       let keys = Object.keys(classes);
-
-    });
+      this.classList = [];
+      for(let i:number =0; i< count; i++){
+        this.classList.push( classes[ keys[i] ]);
+      }
   }
 }
