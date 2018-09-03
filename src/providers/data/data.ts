@@ -10,20 +10,44 @@ export class DataProvider {
   public classList:Array<any>;
   constructor( public afdb:AngularFireDatabase ) {
     this.classesref = 'classes';
-    this.getClasses();
   }
-  getClasses(){
-    let itemRef = this.afdb.object(this.classesref);
-    itemRef.snapshotChanges().subscribe( (action) => {
-      this.unwrapClasses(action.payload.val());
+  getData(){
+    let itemRef = this.afdb.object( this.classesref );
+    return new Promise((resolve, reject) =>{
+      itemRef.snapshotChanges().subscribe( (action) => {
+        if( action.payload.val() ){
+          resolve( this.unwrapClasses( action.payload.val() ) );
+        }
+        else{
+          reject(new Error('no data'));
+        }
+      });
     });
   }
   unwrapClasses( classes ){
       let count = Object.keys(classes).length;
       let keys = Object.keys(classes);
-      this.classList = [];
+      let classList:Array = [];
       for(let i:number =0; i< count; i++){
-        this.classList.push( classes[ keys[i] ]);
+        let item = classes[ keys[i] ];
+        item.id = keys[i];
+        classList.push( item );
       }
+      return classList;
+  }
+
+  getClassData(id:string){
+    let itemRef = this.afdb.object( this.classesref + '/' + id );
+    console.log(itemRef);
+    return new Promise((resolve, reject) =>{
+      itemRef.snapshotChanges().subscribe( (action) => {
+        if( action.payload.val() ){
+          resolve( action.payload.val() );
+        }
+        else{
+          reject(new Error('no data'));
+        }
+      });
+    });
   }
 }

@@ -18,6 +18,8 @@
   </ion-fab>
   <h4>Existing Classes</h4>
   <ion-list>
-    <ion-item></ion-item>
+    <ion-item *ngFor="let class of classes">
+      <h5 (click)="viewSingle(class.id)">{{class.classname}}</h5>
+    </ion-item>
   </ion-list>
 </ion-content>

@@ -9,6 +9,7 @@ import { LoginPage } from '../pages/login/login';
 import { SignoutPage } from '../pages/signout/signout';
 import { SignupPage } from '../pages/signup/signup';
 import { ClassesPage } from '../pages/classes/classes';
+import { ClassSinglePage } from '../pages/class-single/class-single';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 

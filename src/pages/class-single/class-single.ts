@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the ClassSinglePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { AuthProvider } from '../../providers/auth/auth';
+import { DataProvider } from '../../providers/data/data';
+
+import { Student } from '../../models/student';
 
 @IonicPage()
 @Component({
@@ -14,12 +12,31 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'class-single.html',
 })
 export class ClassSinglePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  id:string;
+  classname:string;
+  students:Array<Student>;
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private dataService: DataProvider
+  )
+  {
+    this.id = this.navParams.get('classid')? this.navParams.get('classid') : false ;
+    if(this.id){
+      this.getClassData(this.id);
+    }
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClassSinglePage');
   }
 
+  getClassData( id ){
+    let data = this.dataService.getClassData(id)
+    .then( (data) => {
+      this.classname = data.classname;
+      this.students = data.students;
+     })
+    .catch( (error) => { console.log(error) });
+  }
 }

@@ -43,7 +43,6 @@ export class AuthProvider {
           displayName: username,
           photoURL: ''
         });
-        console.log(user);
       }
     });
   }
