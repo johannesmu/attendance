@@ -25,6 +25,9 @@
     <ion-item text-center>
       <button padding ion-button color="dark" block round outline (click)="signIn()">Sign in</button>
     </ion-item>
+    <ion-item text-center *ngIf ="this.error">
+      {{error}}
+    </ion-item>
     <ion-item>
       <button padding ion-button clear block (click) = "goToSignUp()">
         Sign up for an account

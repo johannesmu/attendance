@@ -67,6 +67,7 @@ export class MyApp {
           else{
             //user is not authenticated
             this.user = '';
+            this.displayName = null;
             this.rootPage = SignupPage;
             //change navigation to show the following:
             this.pages = [

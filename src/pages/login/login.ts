@@ -13,6 +13,7 @@ export class LoginPage {
   private email:string;
   private password:string;
   private username: string;
+  private error: string;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
