@@ -1,19 +1,13 @@
 
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Observable } from 'rxjs/Observable';
-import { from } from 'rxjs';
 
-/*
-  Generated class for the AuthProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class AuthProvider {
   public user:any;
   public displayName:string;
+  public uid:string;
+  public error:string = null;
   constructor(public afAuth:AngularFireAuth) {
     this.observeStatus();
   }
@@ -22,9 +16,12 @@ export class AuthProvider {
       if( user ){
         this.user = user;
         this.displayName = ( user.displayName ) ? user.displayName : '';
+        this.uid = user.uid;
       }
       else{
         this.user = null;
+        this.displayName = null;
+        this.uid = null;
       }
     });
   }
@@ -48,7 +45,21 @@ export class AuthProvider {
   }
   public signIn(email,password){
     this.afAuth.auth.signInWithEmailAndPassword(email,password)
-    .then( (user) => { console.log(user) })
-    .catch( (error) => { console.log(error) });
+    .then( (user) => { this.user = user; return true; })
+    .catch( (error) => {
+      this.error = error.message;
+      return false;
+    });
+  }
+  public getError(){
+    return new Promise((resolve, reject) => {
+      let err = this.error;
+      if(err !== null ){
+        resolve(err);
+      }
+      else{
+        reject('no error');
+      }
+    });
   }
 }
