@@ -2,13 +2,18 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs';
+import { AuthProvider } from '../auth/auth';
 
 @Injectable()
 export class DataProvider {
   classes: Observable<any[]>;
   classesref:string;
   public classList:Array<any>;
-  constructor( public afdb:AngularFireDatabase ) {
+  constructor(
+    public afdb:AngularFireDatabase,
+    private authService:AuthProvider
+  )
+  {
     this.classesref = 'classes';
   }
   getData(){
