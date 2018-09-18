@@ -14,12 +14,21 @@ import { ClassSinglePage } from '../class-single/class-single';
 })
 export class ClassesPage {
   public classes:any;
+  private authd:any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public authService: AuthProvider,
     private dataService:DataProvider ) {
-    this.getClasses();
+      this.authService.authstate.subscribe( (authd) => {
+        if(authd){
+          this.authd = authd;
+          this.getClasses();
+        }
+        else{
+          this.authd = null;
+        }
+      });
   }
 
   ionViewDidLoad() {

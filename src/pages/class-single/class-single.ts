@@ -5,6 +5,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { DataProvider } from '../../providers/data/data';
 
 import { Student } from '../../models/student';
+import { Class } from '../../models/class';
 
 @IonicPage()
 @Component({
@@ -33,7 +34,7 @@ export class ClassSinglePage {
 
   getClassData( id ){
     let data = this.dataService.getClassData(id)
-    .then( (data) => {
+    .then( (data:Class) => {
       this.classname = data.classname;
       this.students = data.students;
      })

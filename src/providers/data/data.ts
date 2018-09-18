@@ -30,19 +30,17 @@ export class DataProvider {
     } );
   }
   getData(){
-    if(this.authstate){
-      let itemRef = this.afdb.object( this.classesref );
-      return new Promise((resolve, reject) =>{
-        itemRef.snapshotChanges().subscribe( (action) => {
-          if( action.payload.val() ){
-            resolve( this.unwrapClasses( action.payload.val() ) );
-          }
-          else{
-            reject(new Error('no data'));
-          }
-        });
+    let itemRef = this.afdb.object( this.classesref );
+    return new Promise((resolve, reject) =>{
+      itemRef.snapshotChanges().subscribe( (action) => {
+        if( action.payload.val() ){
+          resolve( this.unwrapClasses( action.payload.val() ) );
+        }
+        else{
+          reject(new Error('no data'));
+        }
       });
-    }
+    });
   }
   unwrapClasses( classes ){
       let count = Object.keys(classes).length;

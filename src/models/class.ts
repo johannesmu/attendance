@@ -1,7 +1,7 @@
 import { Student } from './student';
 export class Class{
   id:string;
-  name:string;
+  classname:string;
   sessions:Array<string>;
   students:Array<Student>;
   constructor(id,name){
