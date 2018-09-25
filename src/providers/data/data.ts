@@ -38,7 +38,6 @@ export class DataProvider {
 
   getClassData(id:string){
     let itemRef = this.afdb.object( this.classesref + '/' + id );
-    console.log(itemRef);
     return new Promise((resolve, reject) =>{
       itemRef.snapshotChanges().subscribe( (action) => {
         if( action.payload.val() ){
