@@ -21,7 +21,6 @@ export class DataProvider {
         this.authstate = user;
         this.uid = user.uid;
         this.classesref =  this.uid + '/classes';
-          console.log(this.classesref);
       }
       else{
         this.authstate = null;
@@ -31,7 +30,7 @@ export class DataProvider {
   }
   getData(){
     let itemRef = this.afdb.object( this.classesref );
-    return new Promise((resolve, reject) =>{
+    return new Promise( (resolve, reject) =>{
       itemRef.snapshotChanges().subscribe( (action) => {
         if( action.payload.val() ){
           resolve( this.unwrapClasses( action.payload.val() ) );

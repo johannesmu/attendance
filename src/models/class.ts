@@ -6,6 +6,6 @@ export class Class{
   students:Array<Student>;
   constructor(id,name){
     this.id = id;
-    this.name = name;
+    this.classname = name;
   }
 }
