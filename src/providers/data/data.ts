@@ -8,9 +8,9 @@ import { AuthProvider } from '../auth/auth';
 export class DataProvider {
   private authstate;
   private uid:string;
-  classes: Observable<any[]>;
-  classesref:string;
-  public classList:Array<any>;
+  private classesRef:string;
+  private itemRef:any;
+  public data:any;
   constructor(
     public afdb:AngularFireDatabase,
     private authService:AuthProvider
@@ -20,7 +20,7 @@ export class DataProvider {
       if(user){
         this.authstate = user;
         this.uid = user.uid;
-        this.classesref =  this.uid + '/classes';
+        this.classesRef =  this.uid + '/classes';
       }
       else{
         this.authstate = null;
@@ -29,9 +29,9 @@ export class DataProvider {
     } );
   }
   getData(){
-    let itemRef = this.afdb.object( this.classesref );
+    this.itemRef = this.afdb.object( this.classesRef );
     return new Promise( (resolve, reject) =>{
-      itemRef.snapshotChanges().subscribe( (action) => {
+      this.data = this.itemRef.snapshotChanges().subscribe( (action) => {
         if( action.payload.val() ){
           resolve( this.unwrapClasses( action.payload.val() ) );
         }
@@ -40,6 +40,10 @@ export class DataProvider {
         }
       });
     });
+  }
+  closeData(){
+    this.data.unsubscribe();
+    this.authService.signOut();
   }
   unwrapClasses( classes ){
       let count = Object.keys(classes).length;
@@ -53,8 +57,8 @@ export class DataProvider {
       return classList;
   }
 
-  getClassData(id:string){
-    let itemRef = this.afdb.object( this.classesref + '/' + id );
+  getClassDataById(id:string){
+    let itemRef = this.afdb.object( this.classesRef + '/' + id );
     return new Promise((resolve, reject) =>{
       itemRef.snapshotChanges().subscribe( (action) => {
         if( action.payload.val() ){

@@ -21,13 +21,16 @@ export class MyApp {
   rootPage: any = HomePage;
   user:any;
   displayName:string;
-
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public afAuth:AngularFireAuth ) {
+  constructor(
+    public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    public afAuth:AngularFireAuth
+  )
+  {
     this.initializeApp();
-
-    // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'Login', component: LoginPage },
@@ -75,7 +78,9 @@ export class MyApp {
       );
     });
   }
-
+  async getUserName(){
+    return await this.displayName;
+  }
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario

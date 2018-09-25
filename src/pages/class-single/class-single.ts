@@ -33,7 +33,7 @@ export class ClassSinglePage {
   }
 
   getClassData( id ){
-    let data = this.dataService.getClassData(id)
+    let data = this.dataService.getClassDataById(id)
     .then( (data:Class) => {
       this.classname = data.classname;
       this.students = data.students;

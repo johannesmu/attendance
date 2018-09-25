@@ -27,11 +27,23 @@ export class AuthProvider {
   }
   public signUp(username,email,password){
     this.afAuth.auth.createUserWithEmailAndPassword(email,password)
+    .then( (user) => {
+        this.user = user;
+        this.updateUserProfile(username);
+    })
     .catch((error) => { return error });
-    this.updateUserProfile(username);
   }
   public signOut(){
-    this.afAuth.auth.signOut();
+    return new Promise( (resolve, reject) => {
+      let signout = this.afAuth.auth.signOut();
+      if(signout){
+        resolve(true);
+      }
+      else{
+        reject(false);
+      }
+    });
+
   }
   updateUserProfile(username:string){
     this.afAuth.authState.subscribe( (user) => {
@@ -45,7 +57,9 @@ export class AuthProvider {
   }
   public signIn(email,password){
     this.afAuth.auth.signInWithEmailAndPassword(email,password)
-    .then( (user) => { this.user = user; return true; })
+    .then( (user) => {
+      this.user = user;
+      return true; })
     .catch( (error) => {
       this.error = error.message;
       return false;

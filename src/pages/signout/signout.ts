@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { AuthProvider } from '../../providers/auth/auth';
+import { DataProvider } from '../../providers/data/data';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -13,7 +15,10 @@ export class SignoutPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public authService:AuthProvider ) {
+    public authService:AuthProvider,
+    public dataService:DataProvider
+  )
+  {
   }
 
   ionViewDidLoad() {
@@ -21,7 +26,7 @@ export class SignoutPage {
   }
 
   public signOut(){
-    this.authService.signOut();
+    this.dataService.closeData();
   }
 
 }

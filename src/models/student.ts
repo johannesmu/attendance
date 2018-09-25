@@ -1,11 +1,10 @@
 export class Student{
   firstname:string;
   lastname:string;
-  studentid:string;
-  sessions:Array<string>;
-  constructor(firstname,lastname,studentid){
+  id:string;
+  constructor(id,firstname,lastname){
     this.firstname = firstname;
     this.lastname = lastname;
-    this.studentid = studentid;
+    this.id = id;
   }
 }

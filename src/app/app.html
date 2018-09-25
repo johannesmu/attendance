@@ -8,7 +8,7 @@
   <ion-content>
     <ion-list>
       <ion-item *ngIf="displayName !== null" no-lines>
-        <p>Signed in as</p>
+        <p>Hello</p>
         {{displayName}}
       </ion-item>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
