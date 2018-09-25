@@ -3,7 +3,6 @@ import { NavController } from 'ionic-angular';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 // import { auth } from 'firebase';
-import { ListPage } from '../list/list';
 
 @Component({
   selector: 'page-home',

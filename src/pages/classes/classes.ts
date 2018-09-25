@@ -14,22 +14,33 @@ import { ClassSinglePage } from '../class-single/class-single';
 })
 export class ClassesPage {
   public classes:any;
+  private authd:any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public authService: AuthProvider,
-    private dataService:DataProvider ) {
-    this.getClasses();
+    private dataService:DataProvider
+  )
+  {
+
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ClassesPage');
+    //load the classes if user is authenticated
+    this.authService.afAuth.authState.subscribe( (authd) => {
+      if(authd){
+        this.authd = authd;
+        this.loadClasses();
+      }
+      else{
+        this.authd = null;
+      }
+    });
   }
-  getClasses(){
+  loadClasses(){
     this.dataService.getData()
     .then( (data) =>{
       this.classes = data;
-      console.log(this.classes);
     })
     .catch((error) => {
       console.log(error);
