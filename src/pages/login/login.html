@@ -10,28 +10,30 @@
 
 
 <ion-content padding>
-  <ion-list>
-    <ion-item>
-      <h2>Sign in to your account</h2>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Email</ion-label>
-      <ion-input type="email" required [(ngModel)] = "email"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input type="password" required [(ngModel)] = "password"></ion-input>
-    </ion-item>
-    <ion-item text-center>
-      <button padding ion-button color="dark" block round outline (click)="signIn()">Sign in</button>
-    </ion-item>
-    <ion-item text-center *ngIf ="this.error">
-      {{error}}
-    </ion-item>
-    <ion-item>
-      <button padding ion-button clear block (click) = "goToSignUp()">
-        Sign up for an account
-      </button>
-    </ion-item>
-  </ion-list>
+  <form ngSubmit = "signIn()">
+    <ion-list>
+      <ion-item>
+        <h2>Sign in to your account</h2>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="email" required [(ngModel)] = "email" name="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" required [(ngModel)] = "password" name="password"></ion-input>
+      </ion-item>
+      <ion-item text-center>
+        <button padding ion-button color="dark" block round outline (click)="signIn()">Sign in</button>
+      </ion-item>
+      <ion-item text-center *ngIf ="this.error">
+        {{error}}
+      </ion-item>
+      <ion-item>
+        <button padding ion-button clear block (click) = "goToSignUp()">
+          Sign up for an account
+        </button>
+      </ion-item>
+    </ion-list>
+  </form>
 </ion-content>

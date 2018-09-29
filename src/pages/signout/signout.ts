@@ -29,6 +29,10 @@ export class SignoutPage {
     this.dataService.closeData()
     .then( (val) => {
       this.authService.signOut();
+    })
+    .catch( (error) => {
+      console.log(error);
+      this.authService.signOut();
     });
     // this.authService.signOut();
     // this.dataService.closeData( () => {

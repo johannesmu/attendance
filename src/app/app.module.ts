@@ -9,6 +9,7 @@ import { SignoutPage } from '../pages/signout/signout';
 import { SignupPage } from '../pages/signup/signup';
 import { ClassesPage } from '../pages/classes/classes';
 import { ClassSinglePage } from '../pages/class-single/class-single';
+import { ClassAddPage } from '../pages/class-add/class-add';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -30,7 +31,8 @@ import { DataProvider } from '../providers/data/data';
     SignoutPage,
     SignupPage,
     ClassesPage,
-    ClassSinglePage
+    ClassSinglePage,
+    ClassAddPage
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,8 @@ import { DataProvider } from '../providers/data/data';
     SignoutPage,
     SignupPage,
     ClassesPage,
-    ClassSinglePage
+    ClassSinglePage,
+    ClassAddPage
   ],
   providers: [
     StatusBar,

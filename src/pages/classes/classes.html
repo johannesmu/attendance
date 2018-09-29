@@ -8,18 +8,15 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-fab top right>
-    <button ion-fab><ion-icon name="arrow-dropdown"></ion-icon></button>
-    <ion-fab-list>
-      <button ion-fab><ion-icon name="add"></ion-icon></button>
-      <button ion-fab><ion-icon name="checkmark"></ion-icon></button>
-      <button ion-fab><ion-icon name="list"></ion-icon></button>
-    </ion-fab-list>
-  </ion-fab>
+  <button ion-button outline color="dark" (click) = "addClassView()">
+    <ion-icon name="add"></ion-icon>
+     Add a new class
+  </button>
   <h4>Existing Classes</h4>
   <ion-list>
     <ion-item *ngFor="let class of classes">
-      <h5 (click)="viewSingle(class.id)">{{class.classname}}</h5>
+      <h4 (click)="viewSingle(class.id)">{{class.classname}} </h4>
+      <h6 *ngIf = "class.classcode">{{class.classcode}}</h6>
     </ion-item>
   </ion-list>
 </ion-content>

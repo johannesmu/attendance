@@ -7,12 +7,26 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>class-add</ion-title>
+    <ion-title>Add a new class</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <form ngSubmit="addClass()">
+    <ion-list>
+      <ion-item>
+        <ion-label>Class Name</ion-label>
+        <ion-input type="text" required [(ngModel)] = "classname" name="classname" placeholder="Intro to Web"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Class Code</ion-label>
+        <ion-input type="text" required [(ngModel)] = "classcode" name="classcode" placeholder="INT-1012"></ion-input>
+      </ion-item>
+      <ion-item text-center>
+        <button padding ion-button color="dark" block round outline (click) = "addClass()">Save</button>
+      </ion-item>
+    </ion-list>
+  </form>
 </ion-content>

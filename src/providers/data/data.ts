@@ -1,8 +1,12 @@
 
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { Observable } from 'rxjs';
+// import { Observable } from 'rxjs';
 import { AuthProvider } from '../auth/auth';
+
+import { Class } from '../../models/class';
+import { Student } from '../../models/student';
+import { Session } from '../../models/session';
 
 @Injectable()
 export class DataProvider {
@@ -32,7 +36,7 @@ export class DataProvider {
     this.itemRef = this.afdb.object( this.classesRef );
     return new Promise( (resolve, reject) =>{
       let data = this.afdb.object( this.classesRef ).snapshotChanges();
-      this.classesSub = data.subscribe( (action) =>{
+      this.classSub = data.subscribe( (action) =>{
         if( action.payload.val() ){
           resolve( this.unwrapClasses( action.payload.val() ) );
         }
@@ -44,9 +48,9 @@ export class DataProvider {
   }
   closeData(){
     return new Promise( (resolve, reject) => {
-      if( this.classesSub ){
-        this.classesSub.unsubscribe();
-        if( this.classesSub.closed == true ){
+      if( this.classSub ){
+        this.classSub.unsubscribe();
+        if( this.classSub.closed == true ){
           resolve( true );
         }
         else{
@@ -84,5 +88,12 @@ export class DataProvider {
         }
       });
     });
+  }
+  addNewClass( cls:Class ){
+    console.log(cls);
+    let ref = this.classesRef + '/' + cls.classid;
+    console.log(ref);
+    let itemRef = this.afdb.object( ref );
+    itemRef.set(cls);
   }
 }

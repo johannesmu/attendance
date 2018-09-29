@@ -15,6 +15,7 @@ import { Class } from '../../models/class';
 export class ClassSinglePage {
   id:string;
   classname:string;
+  classcode:string;
   students:Array<Student>;
   constructor(
     public navCtrl: NavController,
@@ -37,6 +38,7 @@ export class ClassSinglePage {
     .then( (data:Class) => {
       this.classname = data.classname;
       this.students = data.students;
+      this.classcode = data.classcode;
      })
     .catch( (error) => { console.log(error) });
   }

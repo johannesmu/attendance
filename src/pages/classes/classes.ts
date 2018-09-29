@@ -6,6 +6,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { DataProvider } from '../../providers/data/data';
 
 import { ClassSinglePage } from '../class-single/class-single';
+import { ClassAddPage } from '../class-add/class-add';
 
 @IonicPage()
 @Component({
@@ -26,6 +27,9 @@ export class ClassesPage {
   }
 
   ionViewDidLoad() {
+
+  }
+  ionViewDidEnter(){
     //load the classes if user is authenticated
     this.authService.afAuth.authState.subscribe( (authd) => {
       if(authd){
@@ -37,17 +41,24 @@ export class ClassesPage {
       }
     });
   }
+
   loadClasses(){
     this.dataService.getData()
     .then( (data) =>{
       this.classes = data;
+      console.log(data);
     })
     .catch((error) => {
       console.log(error);
     });
   }
+
   viewSingle(id){
     let data = { classid: id };
     this.navCtrl.push( ClassSinglePage, data );
+  }
+
+  addClassView(){
+    this.navCtrl.push( ClassAddPage );
   }
 }
