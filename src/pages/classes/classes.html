@@ -8,15 +8,25 @@
 </ion-header>
 
 <ion-content padding>
-  <button ion-button outline color="dark" (click) = "addClassView()">
+  <button ion-button round (click) = "addClassView()">
     <ion-icon name="add"></ion-icon>
-     Add a new class
   </button>
   <h4>Existing Classes</h4>
   <ion-list>
     <ion-item *ngFor="let class of classes">
-      <h4 (click)="viewSingle(class.id)">{{class.classname}} </h4>
-      <h6 *ngIf = "class.classcode">{{class.classcode}}</h6>
+      <div class="class-view" >
+        <h4>{{class.classname}} </h4>
+        <h6 *ngIf = "class.classcode">{{class.classcode}}</h6>
+      </div>
+      <button ion-button clear color="dark" item-end (click)="viewSingle(class.classid)">
+        <ion-icon name="settings"></ion-icon>
+      </button>
+      <button ion-button clear color="dark" item-end (click)="studentView({classid: class.classid, classname: class.classname, classcode: class.classcode })">
+        <ion-icon name="people"></ion-icon>
+      </button>
+      <button ion-button clear color="dark" item-end >
+        <ion-icon name="pulse"></ion-icon>
+      </button>
     </ion-item>
   </ion-list>
 </ion-content>

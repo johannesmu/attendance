@@ -11,12 +11,10 @@ export class Class{
     this.classname = name;
     this.classcode = code;
     this.classid = this.generateId();
+    this.sessions = null;
+    this.students = null;
   }
   generateId(){
     return Math.random().toString( 36 ).replace('0.','');
-  }
-  addStudent(id,first,last){
-    let st = new Student(id,first,last);
-    this.students.push( st );
   }
 }

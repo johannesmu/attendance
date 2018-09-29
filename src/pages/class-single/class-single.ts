@@ -30,7 +30,6 @@ export class ClassSinglePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ClassSinglePage');
   }
 
   getClassData( id ){
@@ -41,5 +40,12 @@ export class ClassSinglePage {
       this.classcode = data.classcode;
      })
     .catch( (error) => { console.log(error) });
+  }
+  saveClass(){
+    let ncls = new Class(this.classname,this.classcode);
+    ncls.classid = this.id;
+    console.log( ncls );
+    this.dataService.updateClass( ncls );
+    this.navCtrl.pop();
   }
 }

@@ -14,7 +14,8 @@ export class DataProvider {
   private uid:string;
   private classesRef:string;
   private itemRef:any;
-  public classSub:any;
+  private classSub:any;
+  private studentsSub:any;
   constructor(
     public afdb:AngularFireDatabase,
     private authService:AuthProvider
@@ -90,10 +91,34 @@ export class DataProvider {
     });
   }
   addNewClass( cls:Class ){
-    console.log(cls);
     let ref = this.classesRef + '/' + cls.classid;
-    console.log(ref);
     let itemRef = this.afdb.object( ref );
-    itemRef.set(cls);
+    itemRef.set( cls );
+  }
+  updateClass( cls:Class ){
+    let ref = this.classesRef + '/' + cls.classid;
+    let itemRef = this.afdb.object( ref );
+    itemRef.update( cls );
+  }
+
+  getClassStudents( classid ){
+    let ref = this.classesRef + '/' + classid + '/' + 'students';
+    return new Promise( (resolve,reject) => {
+      let itemRef = this.afdb.object( ref ).snapshotChanges();
+      this.studentsSub = itemRef.subscribe( (action) => {
+        if( action.payload.val() ){
+          resolve( action.payload.val() );
+        }
+        else{
+          reject( new Error('no student data') );
+        }
+      });
+    });
+  }
+  addClassStudent( classid, student<Student> ){
+    let ref = this.classesRef + '/' + classid + '/' + 'students';
+    let studentsRef = this.afdb.object( ref );
+    let add = studentsRef.set( student );
+    console.log( add );
   }
 }

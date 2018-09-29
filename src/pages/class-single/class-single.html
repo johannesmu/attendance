@@ -17,22 +17,19 @@
   <form>
     <ion-list>
       <ion-item>
-        <ion-label>Class ID</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-input type="text" [(ngModel)] = "id" name="id" readonly></ion-input>
-      </ion-item>
-      <ion-item>
         <ion-label>Class Name</ion-label>
       </ion-item>
       <ion-item>
-        <ion-input type="text" [(ngModel)] = "classname" name="classname"></ion-input>
+        <ion-input type="text" [(ngModel)] = "classname" name="classname" required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Class Code</ion-label>
       </ion-item>
       <ion-item>
         <ion-input type="text" [(ngModel)] = "classcode" name="classcode"></ion-input>
+      </ion-item>
+      <ion-item text-center>
+        <button padding ion-button color="dark" block round outline (click) = "saveClass()">Save</button>
       </ion-item>
     </ion-list>
   </form>

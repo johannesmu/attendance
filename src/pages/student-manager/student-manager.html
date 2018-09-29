@@ -1,0 +1,33 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{this.classname}} {{this.classcode}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <button ion-button round>
+    <ion-icon name="add" (click) = "showSingle()"></ion-icon>
+    &nbsp;
+    Add Student
+  </button>
+  <ion-list>
+    <ion-item>
+      <ion-row>
+        <ion-col>Student ID</ion-col>
+        <ion-col>First Name</ion-col>
+        <ion-col>Last Name</ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <ion-col>1234</ion-col>
+        <ion-col>Dave</ion-col>
+        <ion-col>Smith</ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>

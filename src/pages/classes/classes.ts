@@ -7,6 +7,7 @@ import { DataProvider } from '../../providers/data/data';
 
 import { ClassSinglePage } from '../class-single/class-single';
 import { ClassAddPage } from '../class-add/class-add';
+import { StudentManagerPage } from '../student-manager/student-manager';
 
 @IonicPage()
 @Component({
@@ -46,7 +47,6 @@ export class ClassesPage {
     this.dataService.getData()
     .then( (data) =>{
       this.classes = data;
-      console.log(data);
     })
     .catch((error) => {
       console.log(error);
@@ -60,5 +60,9 @@ export class ClassesPage {
 
   addClassView(){
     this.navCtrl.push( ClassAddPage );
+  }
+
+  studentView(classobj){
+    this.navCtrl.push( StudentManagerPage, classobj );
   }
 }
