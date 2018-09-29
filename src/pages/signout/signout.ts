@@ -26,7 +26,14 @@ export class SignoutPage {
   }
 
   public signOut(){
-    this.dataService.closeData();
+    this.dataService.closeData()
+    .then( (val) => {
+      this.authService.signOut();
+    });
+    // this.authService.signOut();
+    // this.dataService.closeData( () => {
+    //   // console.log(result);
+    // });
   }
 
 }

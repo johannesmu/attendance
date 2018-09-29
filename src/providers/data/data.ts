@@ -10,7 +10,7 @@ export class DataProvider {
   private uid:string;
   private classesRef:string;
   private itemRef:any;
-  public data:any;
+  public classSub:any;
   constructor(
     public afdb:AngularFireDatabase,
     private authService:AuthProvider
@@ -31,19 +31,34 @@ export class DataProvider {
   getData(){
     this.itemRef = this.afdb.object( this.classesRef );
     return new Promise( (resolve, reject) =>{
-      this.data = this.itemRef.snapshotChanges().subscribe( (action) => {
+      let data = this.afdb.object( this.classesRef ).snapshotChanges();
+      this.classesSub = data.subscribe( (action) =>{
         if( action.payload.val() ){
           resolve( this.unwrapClasses( action.payload.val() ) );
         }
         else{
-          reject(new Error('no data'));
+          reject( new Error('no data available') );
         }
       });
     });
   }
   closeData(){
-    this.data.unsubscribe();
-    this.authService.signOut();
+    return new Promise( (resolve, reject) => {
+      if( this.classesSub ){
+        this.classesSub.unsubscribe();
+        if( this.classesSub.closed == true ){
+          resolve( true );
+        }
+        else{
+          reject( false );
+        }
+      }
+      else{
+        reject( false );
+      }
+    });
+    // this.subscription.unsubscribe();
+    // console.log( this.subscription );
   }
   unwrapClasses( classes ){
       let count = Object.keys(classes).length;

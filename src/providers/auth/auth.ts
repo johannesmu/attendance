@@ -34,16 +34,7 @@ export class AuthProvider {
     .catch((error) => { return error });
   }
   public signOut(){
-    return new Promise( (resolve, reject) => {
-      let signout = this.afAuth.auth.signOut();
-      if(signout){
-        resolve(true);
-      }
-      else{
-        reject(false);
-      }
-    });
-
+    let signout = this.afAuth.auth.signOut();
   }
   updateUserProfile(username:string){
     this.afAuth.authState.subscribe( (user) => {
