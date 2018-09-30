@@ -20,13 +20,13 @@
         <ion-label>Class Name</ion-label>
       </ion-item>
       <ion-item>
-        <ion-input type="text" formControlName="classname" name="classname" required></ion-input>
+        <ion-input type="text" formControlName="classname" name="classname" required value="{{this.classname}}"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Class Code</ion-label>
       </ion-item>
       <ion-item>
-        <ion-input type="text" formControlName="classcode" name="classcode"></ion-input>
+        <ion-input type="text" formControlName="classcode" name="classcode" value="{{this.classcode}}"></ion-input>
       </ion-item>
       <ion-item text-center>
         <button padding ion-button color="dark" block round outline (click) = "saveClass()">Save</button>

@@ -7,7 +7,7 @@ import { DataProvider } from '../../providers/data/data';
 
 import { Student } from '../../models/student';
 import { Class } from '../../models/class';
-import { Session } from '../models/session';
+import { Session } from '../../models/session';
 
 @IonicPage()
 @Component({
@@ -28,12 +28,12 @@ export class ClassSinglePage {
   )
   {
     this.id = this.navParams.get('classid')? this.navParams.get('classid') : false ;
-    if(this.id){
+    if( this.id ){
       this.getClassData(this.id);
     }
     this.classForm = formBuilder.group({
-      classname: ['bro', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
-      classcode: ['', Validators.compose([Validators.maxLength(7), Validators.pattern('[a-zA-Z0-9 ]*'), Validators.required])]
+      classname: [this.classname, Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
+      classcode: [this.classcode, Validators.compose([Validators.maxLength(7), Validators.pattern('[a-zA-Z0-9 ]*'), Validators.required])]
     });
   }
 
@@ -51,7 +51,8 @@ export class ClassSinglePage {
     .catch( (error) => { console.log(error) });
   }
   saveClass(){
-    let ncls = new Class(this.classname,this.classcode);
+    let form = this.classForm;
+    let ncls = new Class(form.value.classname,form.value.classcode);
     ncls.classid = this.id;
     ncls.students = this.students ? this.students: null;
     ncls.sessions = this.sessions ? this.sessions : null;

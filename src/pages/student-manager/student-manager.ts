@@ -39,8 +39,10 @@ export class StudentManagerPage {
     let data = { classid: this.classid, classname: this.classname, classcode: this.classcode };
     const studentModal = this.modalCtrl.create(StudentSinglePage, data );
     studentModal.onDidDismiss(data => {
-      this.addStudent( this.classid, data );
-      this.getStudents( this.classid );
+      if( data ){
+        this.addStudent( this.classid, data );
+        this.getStudents( this.classid );
+      }
     });
     studentModal.present();
   }
@@ -48,8 +50,7 @@ export class StudentManagerPage {
     this.dataService.getClassStudents( classid)
     .then( (data) => {
       this.students = data;
-      console.log(data);
-    } )
+    })
     .catch( (error) => {console.log(error)} );
   }
   addStudent(classid,student){
