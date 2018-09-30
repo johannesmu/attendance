@@ -8,6 +8,7 @@ import { DataProvider } from '../../providers/data/data';
 import { ClassSinglePage } from '../class-single/class-single';
 import { ClassAddPage } from '../class-add/class-add';
 import { StudentManagerPage } from '../student-manager/student-manager';
+import { SessionManagerPage } from '../session-manager/session-manager';
 
 @IonicPage()
 @Component({
@@ -64,5 +65,9 @@ export class ClassesPage {
 
   studentView(classobj){
     this.navCtrl.push( StudentManagerPage, classobj );
+  }
+
+  sessionView(classobj){
+    this.navCtrl.push( SessionManagerPage, classobj );
   }
 }

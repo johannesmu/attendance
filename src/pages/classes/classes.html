@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Classes</ion-title>
+    <ion-title>Manage Classes</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -26,8 +26,8 @@
       <button ion-button clear color="dark" item-end (click)="studentView({classid: class.classid, classname: class.classname, classcode: class.classcode })">
         <ion-icon name="people"></ion-icon>
       </button>
-      <button ion-button clear color="dark" item-end >
-        <ion-icon name="pulse"></ion-icon>
+      <button ion-button clear color="dark" item-end (click)="sessionView({classid: class.classid, classname: class.classname, classcode: class.classcode })">
+        <ion-icon name="time"></ion-icon>
       </button>
     </ion-item>
   </ion-list>

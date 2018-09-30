@@ -18,8 +18,9 @@ export class ClassSinglePage {
   id:string;
   classname:string;
   classcode:string;
-  students:Array<Student>;
+  students:Array<any>;
   sessions:Array<Session>;
+  classForm:any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,

@@ -12,6 +12,8 @@ import { ClassSinglePage } from '../pages/class-single/class-single';
 import { ClassAddPage } from '../pages/class-add/class-add';
 import { StudentManagerPage } from '../pages/student-manager/student-manager';
 import { StudentSinglePage } from '../pages/student-single/student-single';
+import { SessionManagerPage } from '../pages/session-manager/session-manager';
+import { SessionSinglePage } from '../pages/session-single/session-single';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 

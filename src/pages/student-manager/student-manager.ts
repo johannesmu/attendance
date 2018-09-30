@@ -17,7 +17,7 @@ export class StudentManagerPage {
   classid:string;
   classname:string;
   classcode:string;
-  students:Array<Student>;
+  students:Array<any>;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
