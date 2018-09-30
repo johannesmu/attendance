@@ -40,12 +40,16 @@ export class StudentManagerPage {
     const studentModal = this.modalCtrl.create(StudentSinglePage, data );
     studentModal.onDidDismiss(data => {
       this.addStudent( this.classid, data );
+      this.getStudents( this.classid );
     });
     studentModal.present();
   }
   getStudents(classid){
     this.dataService.getClassStudents( classid)
-    .then( (data) => {this.students = data} )
+    .then( (data) => {
+      this.students = data;
+      console.log(data);
+    } )
     .catch( (error) => {console.log(error)} );
   }
   addStudent(classid,student){

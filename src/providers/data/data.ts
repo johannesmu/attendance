@@ -39,7 +39,7 @@ export class DataProvider {
       let data = this.afdb.object( this.classesRef ).snapshotChanges();
       this.classSub = data.subscribe( (action) =>{
         if( action.payload.val() ){
-          resolve( this.unwrapClasses( action.payload.val() ) );
+          resolve( this.unwrapObjects( action.payload.val() ) );
         }
         else{
           reject( new Error('no data available') );
@@ -62,10 +62,8 @@ export class DataProvider {
         reject( false );
       }
     });
-    // this.subscription.unsubscribe();
-    // console.log( this.subscription );
   }
-  unwrapClasses( classes ){
+  unwrapObjects( classes ){
       let count = Object.keys(classes).length;
       let keys = Object.keys(classes);
       let classList:Array<any> = [];
@@ -100,14 +98,13 @@ export class DataProvider {
     let itemRef = this.afdb.object( ref );
     itemRef.update( cls );
   }
-
   getClassStudents( classid ){
     let ref = this.classesRef + '/' + classid + '/' + 'students';
     return new Promise( (resolve,reject) => {
       let itemRef = this.afdb.object( ref ).snapshotChanges();
       this.studentsSub = itemRef.subscribe( (action) => {
         if( action.payload.val() ){
-          resolve( action.payload.val() );
+          resolve( this.unwrapObjects( action.payload.val() ) );
         }
         else{
           reject( new Error('no student data') );
@@ -115,10 +112,15 @@ export class DataProvider {
       });
     });
   }
-  addClassStudent( classid, student<Student> ){
-    let ref = this.classesRef + '/' + classid + '/' + 'students';
+  addClassStudent( classid:string, student:Student ){
+    console.log( student );
+    let ref:string = this.classesRef + '/'
+    + classid + '/'
+    + 'students' + '/'
+    + student.studentid;
     let studentsRef = this.afdb.object( ref );
-    let add = studentsRef.set( student );
-    console.log( add );
+    studentsRef.set( student )
+    .then( res => console.log(res))
+    .catch( err => console.log(err));
   }
 }

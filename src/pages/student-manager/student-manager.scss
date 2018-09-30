@@ -1,3 +1,11 @@
 page-student-manager {
-
+  .t-label{
+    font-weight: 700;
+  }
+  .student{
+    text-transform: capitalize;
+  }
+  .student.studentid{
+    color: color($colors, primary);
+  }
 }

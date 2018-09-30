@@ -9,24 +9,24 @@
 
 
 <ion-content padding>
-  <button ion-button round>
-    <ion-icon name="add" (click) = "showSingle()"></ion-icon>
+  <button ion-button round (click) = "showSingle()">
+    <ion-icon name="add" ></ion-icon>
     &nbsp;
     Add Student
   </button>
   <ion-list>
     <ion-item>
       <ion-row>
-        <ion-col>Student ID</ion-col>
-        <ion-col>First Name</ion-col>
-        <ion-col>Last Name</ion-col>
+        <ion-col class="t-label">Student ID</ion-col>
+        <ion-col class="t-label">First Name</ion-col>
+        <ion-col class="t-label">Last Name</ion-col>
       </ion-row>
     </ion-item>
-    <ion-item>
-      <ion-row>
-        <ion-col>1234</ion-col>
-        <ion-col>Dave</ion-col>
-        <ion-col>Smith</ion-col>
+    <ion-item *ngFor="let student of students">
+      <ion-row >
+        <ion-col class="student studentid">{{student.studentid}}</ion-col>
+        <ion-col class="student student-first-name">{{student.firstname}}</ion-col>
+        <ion-col class="student student-last-name">{{student.lastname}}</ion-col>
       </ion-row>
     </ion-item>
   </ion-list>
