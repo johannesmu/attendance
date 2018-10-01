@@ -17,9 +17,9 @@ export class HomePage {
   constructor(public navCtrl: NavController, public afAuth:AngularFireAuth ) {
     //set todays date
     let date = new Date();
-    let month:string = date.getMonth() + 1;
-    let day:string = date.getDate();
-    let year:string = date.getFullYear();
+    let month:string = (date.getMonth() + 1).toString();
+    let day:string = date.getDate().toString();
+    let year:string = date.getFullYear().toString();
     console.log(date);
     this.now = day + '/' + month + '/' + year;
   }

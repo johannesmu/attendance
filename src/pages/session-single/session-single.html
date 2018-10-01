@@ -35,7 +35,7 @@
         <ion-datetime displayFormat="H:mm" pickerFormat="H m" [(ngModel)]="end" name="end"></ion-datetime>
       </ion-item>
       <ion-item class="flex">
-        <button ion-button color="dark">Cancel</button>
+        <button ion-button color="dark" (click)="cancel()">Cancel</button>
         <button ion-button color="dark">Save</button>
       </ion-item>
     </ion-list>
