@@ -48,7 +48,7 @@ export class StudentManagerPage {
   }
   getStudents(classid){
     this.dataService.getClassStudents( classid)
-    .then( (data) => {
+    .then( (data:Array<Student>) => {
       this.students = data;
     })
     .catch( (error) => {console.log(error)} );

@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>SessionSingle</ion-title>
+    <ion-title>{{this.title}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -20,19 +20,24 @@
         <ion-label>Session Date</ion-label>
       </ion-item>
       <ion-item>
-        <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" [(ngModel)]="date" name="date"></ion-datetime>
+        <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" [(ngModel)]="date" name="date" required></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label>Start Time</ion-label>
       </ion-item>
       <ion-item>
-        <ion-datetime displayFormat="H:mm" pickerFormat="H m" [(ngModel)]="start" name="start"></ion-datetime>
+        <ion-datetime min="getToday()" displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="start" name="start" required></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label>End Time</ion-label>
       </ion-item>
       <ion-item>
-        <ion-datetime displayFormat="H:mm" pickerFormat="H m" [(ngModel)]="end" name="end"></ion-datetime>
+        <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="end" name="end"></ion-datetime>
+        <button ion-button outline round item-end (click)="setEndTime()" color="secondary">+ 2 hrs</button>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{repeat}} weeks</ion-label>
+        <ion-range min="1" max="12" pin="true" [(ngModel)]="repeat" name="repeat"></ion-range>
       </ion-item>
       <ion-item class="flex">
         <button ion-button color="dark" (click)="cancel()">Cancel</button>
