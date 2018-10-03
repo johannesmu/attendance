@@ -1,9 +1,3 @@
-<!--
-  Generated template for the SessionSinglePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -26,23 +20,44 @@
         <ion-label>Start Time</ion-label>
       </ion-item>
       <ion-item>
-        <ion-datetime min="getToday()" displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="start" name="start" required></ion-datetime>
+        <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="start" name="start" required (ngModelChange)="setEndTime()"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Session Length</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-select [(ngModel)]="sessionLength" name="length" (ngModelChange) = "setEndTime()">
+          <ion-option value="2">2 hours</ion-option>
+          <ion-option value="3">3 hours</ion-option>
+          <ion-option value="4">4 hours</ion-option>
+          <ion-option value="5">5 hours</ion-option>
+          <ion-option value="6">6 hours</ion-option>
+        </ion-select>
       </ion-item>
       <ion-item>
         <ion-label>End Time</ion-label>
       </ion-item>
       <ion-item>
-        <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="end" name="end"></ion-datetime>
-        <button ion-button outline round item-end (click)="setEndTime()" color="secondary">+ 2 hrs</button>
+        <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="end" name="end">
+        </ion-datetime>
       </ion-item>
       <ion-item>
-        <ion-label>{{repeat}} weeks</ion-label>
-        <ion-range min="1" max="12" pin="true" [(ngModel)]="repeat" name="repeat"></ion-range>
+        <ion-label>Room / Location</ion-label>
       </ion-item>
-      <ion-item class="flex">
+      <ion-item>
+        <ion-input name="room" type="text" placeholder="C04" [(ngModel)]="room"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          Generate sessions for the next 12 weeks
+        </ion-label>
+        <ion-checkbox [(ngModel)]="generate" name="generate"></ion-checkbox>
+      </ion-item>
+      <ion-item>
         <button ion-button color="dark" (click)="cancel()">Cancel</button>
-        <button ion-button color="dark">Save</button>
+        <button ion-button color="dark" (click)="saveSessions()">Save</button>
       </ion-item>
+
     </ion-list>
   </form>
 </ion-content>

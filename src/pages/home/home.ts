@@ -49,7 +49,7 @@ export class HomePage {
 
   loadClasses(){
     this.dataService.getData()
-    .then( (data) =>{
+    .then( (data:Array<Class>) =>{
       this.classes = data;
     })
     .catch((error) => {
