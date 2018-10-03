@@ -129,9 +129,16 @@ export class DataProvider {
     + classid + '/'
     + 'sessions';
     let sessionsRef = this.afdb.object( ref );
-    sessionsRef.set( this.wrapSessions(sessions) )
-    .then( res => console.log(res))
-    .catch( err => console.log(err));
+    return new Promise(
+      ( resolve, reject ) => {
+        sessionsRef.set( this.wrapSessions(sessions) )
+        .then( res => resolve( true ) )
+        .catch( err => resolve( false ) );
+      }
+    );
+
+
+
   }
 
   wrapSessions( sessions:Array<Session>){
