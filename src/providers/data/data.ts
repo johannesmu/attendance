@@ -14,8 +14,9 @@ export class DataProvider {
   private uid:string;
   private classesRef:string;
   private itemRef:any;
-  private classSub:any;
-  private studentsSub:any;
+  classSub:any;
+  studentsSub:any;
+  sessionsSub:any;
   constructor(
     public afdb:AngularFireDatabase,
     private authService:AuthProvider
@@ -66,13 +67,13 @@ export class DataProvider {
   unwrapObjects( classes ){
       let count = Object.keys(classes).length;
       let keys = Object.keys(classes);
-      let classList:Array<any> = [];
+      let arr:Array<any> = [];
       for(let i:number =0; i< count; i++){
         let item = classes[ keys[i] ];
         item.id = keys[i];
-        classList.push( item );
+        arr.push( item );
       }
-      return classList;
+      return arr;
   }
 
   getClassDataById(id:string){
@@ -113,7 +114,6 @@ export class DataProvider {
     });
   }
   addClassStudent( classid:string, student:Student ){
-    console.log( student );
     let ref:string = this.classesRef + '/'
     + classid + '/'
     + 'students' + '/'
@@ -122,5 +122,46 @@ export class DataProvider {
     studentsRef.set( student )
     .then( res => console.log(res))
     .catch( err => console.log(err));
+  }
+
+  addSessions( classid:string, sessions:Array<Session> ){
+    let ref:string = this.classesRef + '/'
+    + classid + '/'
+    + 'sessions';
+    let sessionsRef = this.afdb.object( ref );
+    sessionsRef.set( this.wrapSessions(sessions) )
+    .then( res => console.log(res))
+    .catch( err => console.log(err));
+  }
+
+  wrapSessions( sessions:Array<Session>){
+    let sessionObject = {};
+    sessions.forEach(
+      ( session ) => {
+        sessionObject[ session.sessionid ] = {
+          date: session.date,
+          start: session.start,
+          end: session.end,
+          room: session.room,
+          sessionid: session.sessionid
+        }
+      }
+    );
+    return sessionObject;
+  }
+
+  getSessions( classid:string ){
+    let ref = this.classesRef + '/' + classid + '/' + 'sessions';
+    return new Promise( (resolve,reject) => {
+      let itemRef = this.afdb.object( ref ).snapshotChanges();
+      this.sessionsSub = itemRef.subscribe( (action) => {
+        if( action.payload.val() ){
+          resolve( this.unwrapObjects( action.payload.val() ) );
+        }
+        else{
+          reject( new Error('no session data') );
+        }
+      });
+    });
   }
 }

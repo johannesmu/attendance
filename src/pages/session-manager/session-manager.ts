@@ -17,7 +17,7 @@ export class SessionManagerPage {
   classid:string;
   classname:string;
   classcode:string;
-  sessions:Array<any> = [];
+  sessions:Array<Session> = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -35,14 +35,22 @@ export class SessionManagerPage {
     this.classname = this.navParams.get('classname');
     this.classcode = this.navParams.get('classcode');
   }
+  ionViewDidEnter(){
+    this.getSessions( this.classid );
+  }
   showSingle(){
     let data:any = { classid: this.classid, classname: this.classname, classcode: this.classcode };
     const sessionModal = this.modalCtrl.create(SessionSinglePage, data );
-    sessionModal.onDidDismiss(data => {
+    sessionModal.onDidDismiss( (data:Array<Session>) => {
       if( data ){
-        console.log( data );
+        this.dataService.addSessions( this.classid, data );
       }
     });
     sessionModal.present();
+  }
+  getSessions(){
+    this.dataService.getSessions( this.classid )
+    .then( (sessions) => { this.sessions = sessions } )
+    .catch( (err) => { console.log(err); } );
   }
 }

@@ -33,7 +33,7 @@ export class SessionSinglePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SessionSinglePage');
+    // console.log('ionViewDidLoad SessionSinglePage');
   }
   ionViewDidEnter(){
     this.start = '08:30';
@@ -56,13 +56,11 @@ export class SessionSinglePage {
     switch( formatStr ){
       case 'dmy':
         return day + separator + month + separator + year ;
-        break;
       case 'ymd':
         return year + separator + month + separator + day ;
-        break;
       default:
         return day + separator + month + separator + year ;
-        break;
+        
     }
   }
   getClassName(){
@@ -72,7 +70,7 @@ export class SessionSinglePage {
   setEndTime(){
     //set the value of end time using the start time
     if( this.start ){
-      let times:Array<number> = this.start.split(':');
+      let times:Array<string> = this.start.split(':');
       //add two hours to the start time
       let startHour:number = parseInt( times[0] ) + parseInt(this.sessionLength);
       let endTime = ( startHour.toString() + ':' + times[1]);
@@ -87,11 +85,11 @@ export class SessionSinglePage {
 
     for(let i:number = 0; i < totalSessions; i++ ){
       let multiplier:number = (i < 1) ? 0 : 1;
-      date.setDate( date.getDate() + ( this.sessionInterval * multiplier ) );
+      date.setDate( date.getDate() + ( this.sessionInterval ) );
       sessionDates.push( this.formatDate(date,'ymd','-') );
     }
+    // console.log( sessionDates );
     //generate the array of session objects
-
     let sessions:Array<Session> = [];
     for( let i:number = 0; i < totalSessions; i++ ){
       let session = new Session( sessionDates[i] , sessionObj.start, sessionObj.end, sessionObj.room );
@@ -121,7 +119,7 @@ export class SessionSinglePage {
     else{
       let data:Array<Session> = [ sessionSingle ];
     }
-    console.log( data );
+    // console.log( data );
     this.view.dismiss( data );
   }
 

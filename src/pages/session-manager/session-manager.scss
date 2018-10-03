@@ -1,3 +1,6 @@
 page-session-manager {
-
+  .session.room{
+    color: color( $colors, primary );
+    text-transform: uppercase;
+  }
 }
