@@ -17,7 +17,7 @@ export class StudentManagerPage {
   classid:string;
   classname:string;
   classcode:string;
-  students:Array<any>;
+  students:Array<Student>;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -48,7 +48,7 @@ export class StudentManagerPage {
   }
   getStudents(classid){
     this.dataService.getClassStudents( classid)
-    .then( (data) => {
+    .then( (data:Array<Student>) => {
       this.students = data;
     })
     .catch( (error) => {console.log(error)} );

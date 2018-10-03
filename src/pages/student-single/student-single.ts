@@ -31,8 +31,9 @@ export class StudentSinglePage {
     this.classcode = this.navParams.get('classcode');
   }
   saveStudent(){
+    let data = null;
     if( this.studentId && this.studentFirstName && this.studentLastName ){
-      let data = new Student( this.studentId, this.studentFirstName, this.studentLastName );
+      data = new Student( this.studentId, this.studentFirstName, this.studentLastName );
     }
     this.view.dismiss( data );
   }
