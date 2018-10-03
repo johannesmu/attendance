@@ -6,6 +6,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { DataProvider } from '../../providers/data/data';
 
 import { Session } from '../../models/session';
+import { ReadableDate } from '../../models/readabledate';
 import { SessionSinglePage } from '../session-single/session-single';
 
 @IonicPage()
@@ -19,6 +20,7 @@ export class SessionManagerPage {
   classcode:string;
   sessions:Array<Session> = [];
   months:Array<string>;
+  days:Array<string>;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -27,6 +29,7 @@ export class SessionManagerPage {
   )
   {
     this.months = ['jan','feb','mar','apr','jun','jul','aug','sep','oct','nov','dec'];
+    this.days = ['sun','mon','tue','wed','thu','fri','sat'];
   }
 
   ionViewDidLoad() {
@@ -46,7 +49,7 @@ export class SessionManagerPage {
     sessionModal.onDidDismiss( (data:Array<Session>) => {
       if( data ){
         this.dataService.addSessions( this.classid, data )
-        .then( this.getSessions() )
+        .then( res => { this.getSessions() })
         .catch( err => { console.log(err) });
       }
     });
@@ -54,15 +57,23 @@ export class SessionManagerPage {
   }
   getSessions(){
     this.dataService.getSessions( this.classid )
-    .then( (sessions:Array<Session>) => { this.sessions = sessions } )
+    .then( (sessions:Array<Session>) => {
+      this.sessions = sessions;
+      this.humaniseDate( this.sessions );
+    } )
     .catch( (err) => { console.log(err); } );
   }
+  humaniseDate( sessions:Array<Session> ){
+    sessions.forEach( (session) => {
+      session.date = this.humanDate( session.date );
+    });
+  }
   humanDate( dateStr ){
-    let date = new Date( dateStr );
-    let day = date.getDate();
-    let month = date.getMonth();
-    let year = date.getFullYear();
-    let str = day + ' ' + this.months[ month -1 ] + ' ' + year;
-    return str;
+    let dateObj = new Date( dateStr );
+    let date = dateObj.getDate();
+    let day = this.days[ dateObj.getDay() ];
+    let month = this.months[ dateObj.getMonth() - 1 ];
+    let year = dateObj.getFullYear();
+    return new ReadableDate(day,date,month,year);
   }
 }

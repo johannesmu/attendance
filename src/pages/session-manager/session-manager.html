@@ -21,9 +21,20 @@
   </button>
   <ion-list>
     <ion-item *ngFor="let session of sessions">
-      <h2>{{ humanDate( session.date ) }}</h2>
-      <h6>start: {{session.start}} end: {{session.end}}</h6>
-      <p>location: {{session.room}}</p>
+      <h2>
+        <span class="session day">{{ session.date.day }}</span>
+        <span class="session date">{{session.date.date}}</span>
+        <span class="session month">{{session.date.month}}</span>
+        <span class="session year">{{session.date.year}}</span>
+      </h2>
+      <h6>
+        start: <span class="session start">{{session.start}}</span>
+        end: <span class="session end">{{session.end}}</span>
+      </h6>
+      <p>location: <span class="session room">{{session.room}}</span></p>
+      <button ion-button clear item-end color="dark" (click)="editSession()">
+        <ion-icon name="create"></ion-icon>
+      </button>
     </ion-item>
   </ion-list>
 </ion-content>

@@ -3,4 +3,13 @@ page-session-manager {
     color: color( $colors, primary );
     text-transform: uppercase;
   }
+  .session.day, .session.month{
+    text-transform: capitalize;
+  }
+  .session.date, .session.month{
+    font-weight: bold;
+  }
+  .session.start{
+    color: color( $colors, dark );
+  }
 }
