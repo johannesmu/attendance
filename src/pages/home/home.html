@@ -8,21 +8,14 @@
 </ion-header>
 
 <ion-content padding>
-  <h2>Today</h2>
-  <ion-badge padding color="dark">Today is {{now}}</ion-badge>
-  <h2>Upcoming</h2>
   <ion-list>
     <ion-item>
-      Intro to Web B
-      <ion-badge item-end padding color="light">Thu 30/08/2018</ion-badge>
+      <h2>Today</h2>
+      <h4>{{now}}</h4>
     </ion-item>
-    <ion-item>
-      Intro to Web A
-      <ion-badge item-end padding color="light">Thu 31/08/2018</ion-badge>
-    </ion-item>
-    <ion-item>
-      Intro to Web A
-      <ion-badge item-end padding color="light">Thu 31/08/2018</ion-badge>
+    <ion-item *ngFor="let class of classes">
+      <h4 class="classes classname">{{class.classname}} </h4>
+      <h6 color="primary" *ngIf = "class.classcode" class="classes classcode">{{class.classcode}}</h6>
     </ion-item>
   </ion-list>
 </ion-content>

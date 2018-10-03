@@ -72,7 +72,7 @@ export class MyApp {
             //user is not authenticated
             this.user = '';
             this.displayName = null;
-            this.rootPage = SignupPage;
+            this.rootPage = LoginPage;
             //change navigation to show the following:
             this.pages = [
               { title: 'Login', component: LoginPage },
