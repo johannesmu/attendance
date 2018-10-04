@@ -63,9 +63,12 @@ export class SessionManagerPage {
     } )
     .catch( (err) => { console.log(err); } );
   }
+  editSession( session:Session ){
+    console.log( session );
+  }
   humaniseDate( sessions:Array<Session> ){
     sessions.forEach( (session) => {
-      session.date = this.humanDate( session.date );
+      session.date = <any>this.humanDate( session.date );
     });
   }
   humanDate( dateStr ){

@@ -32,7 +32,7 @@
         end: <span class="session end">{{session.end}}</span>
       </h6>
       <p>location: <span class="session room">{{session.room}}</span></p>
-      <button ion-button clear item-end color="dark" (click)="editSession()">
+      <button ion-button clear item-end color="dark" (click)="editSession( session )">
         <ion-icon name="create"></ion-icon>
       </button>
     </ion-item>
