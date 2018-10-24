@@ -20,13 +20,13 @@
         <h4 class="classes classname">{{class.classname}} </h4>
         <h6 *ngIf = "class.classcode" class="classes classcode">{{class.classcode}}</h6>
       </div>
-      <button ion-button clear color="dark" item-end (click)="viewSingle(class.classid)">
+      <button class="class-button" ion-button clear color="dark" item-end (click)="viewSingle(class.classid)">
         <ion-icon name="create"></ion-icon>
       </button>
-      <button ion-button clear color="dark" item-end (click)="studentView({classid: class.classid, classname: class.classname, classcode: class.classcode })">
+      <button class="class-button" ion-button clear color="dark" item-end (click)="studentView({classid: class.classid, classname: class.classname, classcode: class.classcode })">
         <ion-icon name="people"></ion-icon>
       </button>
-      <button ion-button clear color="dark" item-end (click)="sessionView({classid: class.classid, classname: class.classname, classcode: class.classcode })">
+      <button class="class-button" ion-button clear color="dark" item-end (click)="sessionView({classid: class.classid, classname: class.classname, classcode: class.classcode })">
         <ion-icon name="time"></ion-icon>
       </button>
     </ion-item>

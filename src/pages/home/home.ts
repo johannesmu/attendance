@@ -5,6 +5,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { DataProvider } from '../../providers/data/data';
+import { DateProvider } from '../../providers/date/date';
 import { Class } from '../../models/class';
 // import { auth } from 'firebase';
 
@@ -23,15 +24,17 @@ export class HomePage {
     public navCtrl: NavController,
     public afAuth:AngularFireAuth,
     public authService: AuthProvider,
-    private dataService:DataProvider
+    private dataService:DataProvider,
+    private dateService:DateProvider
   )
   {
     //set todays date
-    let date = new Date();
-    let month:string = (date.getMonth() + 1).toString();
-    let day:string = date.getDate().toString();
-    let year:string = date.getFullYear().toString();
-    this.now = day + '/' + month + '/' + year;
+    // let date = new Date();
+    // let month:string = (date.getMonth() + 1).toString();
+    // let day:string = date.getDate().toString();
+    // let year:string = date.getFullYear().toString();
+    // this.now = day + '/' + month + '/' + year;
+    this.now = this.getTodaysDate();
   }
 
   ionViewDidEnter(){
@@ -55,5 +58,12 @@ export class HomePage {
     .catch((error) => {
       console.log(error);
     });
+  }
+
+  getTodaysDate(){
+    let today:string = this.dateService.getToday();
+    //get day of the week
+    let date:any = new Date(today);
+    return this.dateService.getDayName(today,false) +' ' + today;
   }
 }

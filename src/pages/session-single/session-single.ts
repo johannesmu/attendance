@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
+import{ DateProvider } from '../../providers/date/date';
+
 import { Session } from '../../models/session';
 
 @IonicPage()
@@ -60,7 +62,7 @@ export class SessionSinglePage {
         return year + separator + month + separator + day ;
       default:
         return day + separator + month + separator + year ;
-        
+
     }
   }
   getClassName(){
@@ -72,7 +74,7 @@ export class SessionSinglePage {
     if( this.start ){
       let times:Array<string> = this.start.split(':');
       //add two hours to the start time
-      let startHour:number = parseInt( times[0] ) + parseInt(this.sessionLength);
+      let startHour:number = Number( times[0] ) + Number(this.sessionLength);
       let endTime = ( startHour.toString() + ':' + times[1]);
       this.end = endTime;
     }
@@ -113,6 +115,7 @@ export class SessionSinglePage {
   }
   saveSessions(){
     let sessionSingle:Session = new Session(this.date,this.start,this.end,this.room);
+    let data:Array<Session> = [];
     if( this.generate == true ){
       let data:Array<Session> = this.generateSessions( sessionSingle, this.repeat );
     }
