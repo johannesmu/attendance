@@ -32,12 +32,10 @@ export class SignoutPage {
     })
     .catch( (error) => {
       console.log(error);
-      this.authService.signOut();
+      setTimeout( () => {
+        this.authService.signOut();
+      }, 2000);
     });
-    // this.authService.signOut();
-    // this.dataService.closeData( () => {
-    //   // console.log(result);
-    // });
   }
 
 }
