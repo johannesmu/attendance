@@ -36,16 +36,7 @@ export class AuthProvider {
     .catch((error) => { return error });
   }
   public signOut(){
-    // if(this.dataService.classSub){
-    //   this.dataService.classSub.unsubscribe();
-    // }
-    // if(this.dataService.studentsSub){
-    //   this.dataService.studentsSub.unsubscribe();
-    // }
-    // if(this.dataService.sessionsSub){
-    //   this.dataService.sessionsSub.unsubscribe();
-    // }
-    let signout = this.afAuth.auth.signOut();
+    this.afAuth.auth.signOut();
   }
   updateUserProfile(username:string){
     this.afAuth.authState.subscribe( (user) => {

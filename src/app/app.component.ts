@@ -14,6 +14,7 @@ import { StudentManagerPage } from '../pages/student-manager/student-manager';
 import { StudentSinglePage } from '../pages/student-single/student-single';
 import { SessionManagerPage } from '../pages/session-manager/session-manager';
 import { SessionSinglePage } from '../pages/session-single/session-single';
+import { AttendanceManagerPage } from '../pages/attendance-manager/attendance-manager';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -65,7 +66,8 @@ export class MyApp {
             this.pages = [
               { title: 'Home', component: HomePage },
               { title: 'Classes', component: ClassesPage },
-              { title: 'Sign out', component: SignoutPage }
+              { title: 'Sign out', component: SignoutPage },
+              { title: 'Attendance', component: AttendanceManagerPage}
             ];
           }
           else{

@@ -13,9 +13,15 @@
       <h2>Today</h2>
       <h4>{{now}}</h4>
     </ion-item>
+    <div class="spinner" [ngClass]="{active:dataLoading, inactive:!dataLoading}">
+      <ion-spinner></ion-spinner>
+    </div>
     <ion-item *ngFor="let class of classes">
       <h4 class="classes classname">{{class.classname}} </h4>
       <h6 color="primary" *ngIf = "class.classcode" class="classes classcode">{{class.classcode}}</h6>
+      <button class="class-button" ion-button clear color="dark" item-end (click)="viewSingle(class.classid)">
+        <ion-icon name="pulse"></ion-icon>
+      </button>
     </ion-item>
   </ion-list>
 </ion-content>

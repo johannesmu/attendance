@@ -20,6 +20,7 @@ export class HomePage {
   public now:string;
   public classes:Array<Class>;
   public authd:any;
+  public dataLoading = false;
   constructor(
     public navCtrl: NavController,
     public afAuth:AngularFireAuth,
@@ -28,12 +29,6 @@ export class HomePage {
     private dateService:DateProvider
   )
   {
-    //set todays date
-    // let date = new Date();
-    // let month:string = (date.getMonth() + 1).toString();
-    // let day:string = date.getDate().toString();
-    // let year:string = date.getFullYear().toString();
-    // this.now = day + '/' + month + '/' + year;
     this.now = this.getTodaysDate();
   }
 
@@ -51,9 +46,11 @@ export class HomePage {
   }
 
   loadClasses(){
+    this.dataLoading = true;
     this.dataService.getData()
     .then( (data:Array<Class>) =>{
       this.classes = data;
+      this.dataLoading = false;
     })
     .catch((error) => {
       console.log(error);
@@ -64,6 +61,6 @@ export class HomePage {
     let today:string = this.dateService.getToday();
     //get day of the week
     let date:any = new Date(today);
-    return this.dateService.getDayName(today,false) +' ' + today;
+    return  today;
   }
 }

@@ -22,12 +22,12 @@ export class SignoutPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SignoutPage');
+
   }
 
   public signOut(){
     this.dataService.closeData()
-    .then( (val) => {
+    .then( (response) => {
       this.authService.signOut();
     })
     .catch( (error) => {

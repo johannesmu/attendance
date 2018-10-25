@@ -14,6 +14,7 @@ import { StudentManagerPage } from '../pages/student-manager/student-manager';
 import { StudentSinglePage } from '../pages/student-single/student-single';
 import { SessionManagerPage } from '../pages/session-manager/session-manager';
 import { SessionSinglePage } from '../pages/session-single/session-single';
+import { AttendanceManagerPage } from '../pages/attendance-manager/attendance-manager';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -41,7 +42,8 @@ import { DateProvider } from '../providers/date/date';
     StudentManagerPage,
     StudentSinglePage,
     SessionManagerPage,
-    SessionSinglePage
+    SessionSinglePage,
+    AttendanceManagerPage
   ],
   imports: [
     BrowserModule,
@@ -63,7 +65,8 @@ import { DateProvider } from '../providers/date/date';
     StudentManagerPage,
     StudentSinglePage,
     SessionManagerPage,
-    SessionSinglePage
+    SessionSinglePage,
+    AttendanceManagerPage
   ],
   providers: [
     StatusBar,
