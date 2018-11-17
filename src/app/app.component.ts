@@ -66,8 +66,8 @@ export class MyApp {
             this.pages = [
               { title: 'Home', component: HomePage },
               { title: 'Classes', component: ClassesPage },
-              { title: 'Sign out', component: SignoutPage },
-              { title: 'Attendance', component: AttendanceManagerPage}
+              { title: 'Attendance', component: AttendanceManagerPage},
+              { title: 'Sign out', component: SignoutPage }              
             ];
           }
           else{
