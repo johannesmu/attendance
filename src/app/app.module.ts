@@ -1,80 +1,34 @@
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { RouteReuseStrategy } from '@angular/router';
 
-import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { LoginPage } from '../pages/login/login';
-import { SignoutPage } from '../pages/signout/signout';
-import { SignupPage } from '../pages/signup/signup';
-import { ClassesPage } from '../pages/classes/classes';
-import { ClassSinglePage } from '../pages/class-single/class-single';
-import { ClassAddPage } from '../pages/class-add/class-add';
-import { StudentManagerPage } from '../pages/student-manager/student-manager';
-import { StudentSinglePage } from '../pages/student-single/student-single';
-import { SessionManagerPage } from '../pages/session-manager/session-manager';
-import { SessionSinglePage } from '../pages/session-single/session-single';
-import { AttendanceManagerPage } from '../pages/attendance-manager/attendance-manager';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-
-
-import { environment } from '../environments/environment';
-import { AuthProvider } from '../providers/auth/auth';
-import { DataProvider } from '../providers/data/data';
-import { DateProvider } from '../providers/date/date';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 @NgModule({
-  declarations: [
-    MyApp,
-    HomePage,
-    LoginPage,
-    SignoutPage,
-    SignupPage,
-    ClassesPage,
-    ClassSinglePage,
-    ClassAddPage,
-    StudentManagerPage,
-    StudentSinglePage,
-    SessionManagerPage,
-    SessionSinglePage,
-    AttendanceManagerPage
-  ],
+  declarations: [AppComponent],
+  entryComponents: [],
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    AngularFireModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    HomePage,
-    LoginPage,
-    SignoutPage,
-    SignupPage,
-    ClassesPage,
-    ClassSinglePage,
-    ClassAddPage,
-    StudentManagerPage,
-    StudentSinglePage,
-    SessionManagerPage,
-    SessionSinglePage,
-    AttendanceManagerPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvider,
-    DataProvider,
-    DateProvider
-  ]
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

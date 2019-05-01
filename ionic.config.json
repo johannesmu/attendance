@@ -1,7 +1,5 @@
 {
-  "name": "attendance",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular"
+  "name": "att",
+  "integrations": {},
+  "type": "angular"
 }
