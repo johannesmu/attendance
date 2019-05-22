@@ -1,9 +1,17 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>signout</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <ion-item>
+      <p>Sign out of your account</p>
+    </ion-item>
+    <ion-button (click)="signOut()" expand="full">Sign Out</ion-button>
+  </ion-list>
 </ion-content>
