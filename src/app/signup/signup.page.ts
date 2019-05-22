@@ -24,10 +24,9 @@ export class SignupPage implements OnInit {
   }
 
   createAccount(){
-    console.log('hey');
     this.auth.signUp( this.signUpForm.value.email, this.signUpForm.value.password )
     .then( (data) => {
-      console.log(data);
+      this.router.navigate(['/home']);
     })
     .catch( (error) => {
       console.log(error);

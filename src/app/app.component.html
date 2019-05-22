@@ -20,7 +20,10 @@
       </ion-content>
       <ion-footer>
         <ion-list>
-          <ion-item *ngIf="this.user">{{user.email}}</ion-item>
+          <ion-item *ngIf="this.user">
+            <img *ngIf="user.photoURL" slot="start" class="profile-image" src="{{user.photoURL}}">
+            {{user.email}}
+          </ion-item>
         </ion-list>
       </ion-footer>
     </ion-menu>

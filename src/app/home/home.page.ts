@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  now:Date;
+  constructor(){}
+  ngOnInit(){
 
+  }
+  ionViewDidEnter(){
+    this.now = new Date();
+  }
 }
