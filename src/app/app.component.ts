@@ -57,14 +57,14 @@ export class AppComponent {
             icon: 'planet'
           },
           {
-            title: 'Sessions',
-            url: '/sessions',
-            icon: 'time'
-          },
-          {
             title: 'Classes',
             url: '/classes',
             icon: 'apps'
+          },
+          {
+            title: 'Sessions',
+            url: '/sessions',
+            icon: 'time'
           },
           {
             title: 'Signout',

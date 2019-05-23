@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { interval } from 'rxjs';
+import { DataService } from '../data.service';
+
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,9 @@ import { interval } from 'rxjs';
 })
 export class HomePage {
   now:Date;
-  constructor(){}
+  constructor(
+    private dataService:DataService
+  ){}
   ngOnInit(){
 
   }
