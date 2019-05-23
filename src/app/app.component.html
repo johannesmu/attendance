@@ -20,7 +20,7 @@
       </ion-content>
       <ion-footer>
         <ion-list>
-          <ion-item *ngIf="this.user" detail="true">
+          <ion-item *ngIf="this.user"  [routerLink]="profile">
             <img *ngIf="user.photoURL" slot="start" class="profile-image" src="{{user.photoURL}}">
             <span slot="end">{{user.email}}</span>
           </ion-item>

@@ -89,4 +89,8 @@ export class AppComponent {
       }
     })
   }
+
+  openProfile(){
+    this.router.navigate(['/profile']);
+  }
 }
