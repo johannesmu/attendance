@@ -24,7 +24,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 
-import { environment } from '../environments/environment';
+import { environment } from '../environments/environment.1';
 import { AuthProvider } from '../providers/auth/auth';
 import { DataProvider } from '../providers/data/data';
 import { DateProvider } from '../providers/date/date';
