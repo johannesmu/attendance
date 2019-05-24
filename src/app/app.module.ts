@@ -14,6 +14,7 @@ import { StudentManagerPage } from '../pages/student-manager/student-manager';
 import { StudentSinglePage } from '../pages/student-single/student-single';
 import { SessionManagerPage } from '../pages/session-manager/session-manager';
 import { SessionSinglePage } from '../pages/session-single/session-single';
+import { AttendanceManagerPage } from '../pages/attendance-manager/attendance-manager';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -23,7 +24,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 
-import { environment } from '../environments/environment';
+import { environment } from '../environments/environment.1';
 import { AuthProvider } from '../providers/auth/auth';
 import { DataProvider } from '../providers/data/data';
 import { DateProvider } from '../providers/date/date';
@@ -41,7 +42,8 @@ import { DateProvider } from '../providers/date/date';
     StudentManagerPage,
     StudentSinglePage,
     SessionManagerPage,
-    SessionSinglePage
+    SessionSinglePage,
+    AttendanceManagerPage
   ],
   imports: [
     BrowserModule,
@@ -63,7 +65,8 @@ import { DateProvider } from '../providers/date/date';
     StudentManagerPage,
     StudentSinglePage,
     SessionManagerPage,
-    SessionSinglePage
+    SessionSinglePage,
+    AttendanceManagerPage
   ],
   providers: [
     StatusBar,

@@ -25,7 +25,7 @@ export class ClassesPage {
     private dataService:DataProvider
   )
   {
-
+    //do something
   }
 
   ionViewDidLoad() {

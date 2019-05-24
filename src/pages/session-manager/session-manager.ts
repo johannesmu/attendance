@@ -68,7 +68,7 @@ export class SessionManagerPage {
   }
   humaniseDate( sessions:Array<Session> ){
     sessions.forEach( (session) => {
-      session.date = <any>this.humanDate( session.date );
+      session.date =  this.humanDate( session.date ).toString();
     });
   }
   humanDate( dateStr ){

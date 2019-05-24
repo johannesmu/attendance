@@ -2,6 +2,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 
+
+
 @Injectable()
 export class AuthProvider {
   public user:any;
@@ -34,7 +36,7 @@ export class AuthProvider {
     .catch((error) => { return error });
   }
   public signOut(){
-    let signout = this.afAuth.auth.signOut();
+    this.afAuth.auth.signOut();
   }
   updateUserProfile(username:string){
     this.afAuth.authState.subscribe( (user) => {

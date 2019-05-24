@@ -14,9 +14,10 @@ export class DataProvider {
   private uid:string;
   private classesRef:string;
   private itemRef:any;
-  classSub:any;
-  studentsSub:any;
-  sessionsSub:any;
+  public classesSub:any;
+  public studentsSub:any;
+  public sessionsSub:any;
+  private subs:Array<any> = [];
   constructor(
     public afdb:AngularFireDatabase,
     private authService:AuthProvider
@@ -38,7 +39,7 @@ export class DataProvider {
     this.itemRef = this.afdb.object( this.classesRef );
     return new Promise( (resolve, reject) =>{
       let data = this.afdb.object( this.classesRef ).snapshotChanges();
-      this.classSub = data.subscribe( (action) =>{
+      let classesSub = data.subscribe( (action) =>{
         if( action.payload.val() ){
           resolve( this.unwrapObjects( action.payload.val() ) );
         }
@@ -46,21 +47,29 @@ export class DataProvider {
           reject( new Error('no data available') );
         }
       });
+      this.subs.push( classesSub );
     });
   }
   closeData(){
     return new Promise( (resolve, reject) => {
-      if( this.classSub ){
-        this.classSub.unsubscribe();
-        if( this.classSub.closed == true ){
-          resolve( true );
+      let status:boolean = true;
+      this.subs.forEach(
+        (sub) => {
+          sub.unsubscribe();
         }
-        else{
-          reject( false );
-        }
+      );
+      setTimeout( () => {
+        this.subs.forEach( (sub) => {
+          if( sub.closed == false ){
+            status = false;
+          }
+        });
+      }, 1000);
+      if( !status ){
+        reject(false);
       }
       else{
-        reject( false );
+        resolve( true );
       }
     });
   }
@@ -79,7 +88,7 @@ export class DataProvider {
   getClassDataById(id:string){
     let itemRef = this.afdb.object( this.classesRef + '/' + id );
     return new Promise((resolve, reject) =>{
-      itemRef.snapshotChanges().subscribe( (action) => {
+      let classSub = itemRef.snapshotChanges().subscribe( (action) => {
         if( action.payload.val() ){
           resolve( action.payload.val() );
         }
@@ -87,6 +96,7 @@ export class DataProvider {
           reject(new Error('no data'));
         }
       });
+      this.subs.push(classSub);
     });
   }
   addNewClass( cls:Class ){
@@ -103,7 +113,7 @@ export class DataProvider {
     let ref = this.classesRef + '/' + classid + '/' + 'students';
     return new Promise( (resolve,reject) => {
       let itemRef = this.afdb.object( ref ).snapshotChanges();
-      this.studentsSub = itemRef.subscribe( (action) => {
+      let studentsSub = itemRef.subscribe( (action) => {
         if( action.payload.val() ){
           resolve( this.unwrapObjects( action.payload.val() ) );
         }
@@ -111,6 +121,7 @@ export class DataProvider {
           reject( new Error('no student data') );
         }
       });
+      this.subs.push( studentsSub );
     });
   }
   addClassStudent( classid:string, student:Student ){
@@ -161,7 +172,7 @@ export class DataProvider {
     let ref = this.classesRef + '/' + classid + '/' + 'sessions';
     return new Promise( (resolve,reject) => {
       let itemRef = this.afdb.object( ref ).snapshotChanges();
-      this.sessionsSub = itemRef.subscribe( (action) => {
+      let sessionsSub = itemRef.subscribe( (action) => {
         if( action.payload.val() ){
           resolve( this.unwrapObjects( action.payload.val() ) );
         }
@@ -169,6 +180,7 @@ export class DataProvider {
           reject( new Error('no session data') );
         }
       });
+      this.subs.push( sessionsSub );
     });
   }
 }
