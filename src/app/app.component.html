@@ -20,9 +20,11 @@
       </ion-content>
       <ion-footer>
         <ion-list>
-          <ion-item *ngIf="this.user"  [routerLink]="profile">
-            <img *ngIf="user.photoURL" slot="start" class="profile-image" src="{{user.photoURL}}">
-            <span slot="end">{{user.email}}</span>
+          <ion-item *ngIf="this.user"  (click)="openProfile()">
+            <ion-menu-toggle>
+              <img *ngIf="user.photoURL" slot="start" class="profile-image" src="{{user.photoURL}}">
+              <span slot="end">{{user.email}}</span>
+            </ion-menu-toggle>
           </ion-item>
         </ion-list>
       </ion-footer>

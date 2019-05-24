@@ -26,7 +26,8 @@ export class SigninPage implements OnInit {
   signIn(){
     this.auth.signIn( this.signInForm.value.email, this.signInForm.value.password )
     .then( (user) => {
-      console.log(user);
+      //signin successful
+      this.router.navigate(['/home']);
     })
     .catch((error) => {
       console.log(error);
