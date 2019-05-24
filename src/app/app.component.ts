@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
@@ -33,7 +33,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private authService:AuthService,
-    private router:Router
+    private router:Router,
+    private menu:MenuController
   ) {
     this.initializeApp();
     this.subscribeToAuth();
@@ -91,6 +92,7 @@ export class AppComponent {
   }
 
   openProfile(){
+    this.menu.close();
     this.router.navigate(['/profile']);
   }
 }
