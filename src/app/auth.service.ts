@@ -10,6 +10,7 @@ export class AuthService {
   user:any;
   authState:BehaviorSubject<any> = new BehaviorSubject(this.user);
   authSub:Subscription;
+  //default profile image 
   defaultProfileImage:string = 'https://firebasestorage.googleapis.com/v0/b/attendance-14ada.appspot.com/o/profile.png?alt=media&token=a805e70f-1cd8-4855-8479-b1bbe0eb2be3';
 
   constructor( private afAuth:AngularFireAuth ) { 
