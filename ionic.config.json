@@ -1,5 +1,7 @@
 {
   "name": "att",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

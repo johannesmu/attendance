@@ -21,6 +21,12 @@ export class SignupPage implements OnInit {
       email: ['',[ Validators.required, Validators.email ]],
       password: ['', [Validators.required, Validators.minLength(6) ] ]
     });
+    //check for auth status
+    this.auth.authState.subscribe( (user) => {
+      if( user ){
+        this.router.navigate(['/home']);
+      }
+    });
   }
 
   createAccount(){
