@@ -21,7 +21,7 @@
       <ion-footer>
         <ion-list>
           <ion-item *ngIf="this.user"  (click)="openProfile()">
-              <img *ngIf="user.photoURL" slot="start" class="profile-image" src="{{user.photoURL}}">
+              <img *ngIf="user.picture" slot="start" class="profile-image" src="{{user.picture}}">
               <span slot="end">{{user.email}}</span>
           </ion-item>
         </ion-list>

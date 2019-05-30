@@ -7,13 +7,15 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from './auth.service';
 
+import { UserProfile } from '../app/models/userprofile.model';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
   sub:Subscription;
-  user:any;
+  user:UserProfile = new UserProfile();
   public appPages = [
     {
       title: 'Signup',
@@ -50,7 +52,7 @@ export class AppComponent {
   subscribeToAuth(){
     this.sub = this.authService.authState.subscribe( (user) => {
       if( user ){
-        this.user = user;
+        this.user.set(user.displayName, user.email, user.photoURL);
         this.appPages = [
           {
             title: 'Dashboard',
