@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    <ion-title>Your Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <img class="profile-image" src="{{profile.picture}}">
+    </ion-item>
+    <ion-item class="btn-item">
+      <ion-button expand="full">
+        <ion-icon name="camera" slot="start"></ion-icon>
+        Update Image
+      </ion-button>
+    </ion-item>
+    <ion-item>
+        <ion-label position="stacked">User Name</ion-label>
+        <ion-input type="text" value="{{profile.name}}"></ion-input>
+      </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input type="text" value="{{profile.email}}"></ion-input>
+    </ion-item>
+
+    <ion-item class="btn-item">
+      <ion-label position="stacked">Send a password reset email</ion-label>
+      
+      </ion-item>
+      <ion-button expand="full">
+          Change Password
+        </ion-button>
+  </ion-list>
+</ion-content>

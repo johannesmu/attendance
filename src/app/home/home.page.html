@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list lines="none">
+      <ion-item>{{ now | date: "EEEE, dd/LLL/yyyy HH:mm" }}</ion-item>
+      <ion-item>Upcoming Sessions</ion-item>
+      <ion-item>Cross Platform Apps</ion-item>
+    </ion-list>
+</ion-content>
