@@ -15,6 +15,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from 'src/environments/environment.1';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { ClassesDetailPageModule } from './classes-detail/classes-detail.module';
+import { ClassesAddPageModule } from './classes-add/classes-add.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +29,9 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     AngularFireStorageModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    ClassesDetailPageModule,
+    ClassesAddPageModule
   ],
   providers: [
     StatusBar,
