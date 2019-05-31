@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { Class } from '../models/class.model';
 
 @Component({
@@ -8,7 +9,9 @@ import { Class } from '../models/class.model';
 })
 export class ClassesDetailPage implements OnInit {
   class:Class;
-  constructor() { }
+  constructor(
+    private modalController:ModalController
+  ) { }
 
   ngOnInit() {
   }

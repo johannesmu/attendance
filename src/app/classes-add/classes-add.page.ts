@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-classes-add',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClassesAddPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    modalController:ModalController
+  ) { }
 
   ngOnInit() {
   }
-
+  close(){
+    this.modalController.dismiss();
+  }
 }

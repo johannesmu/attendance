@@ -35,6 +35,10 @@ export class ClassesPage implements OnInit {
     const modal = await this.modalController.create({
       component: ClassesAddPage,
     });
+    modal.onDidDismiss().then((data) => {
+      console.log( data );
+    });
+    
     return await modal.present();
   }
   
