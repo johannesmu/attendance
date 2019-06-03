@@ -20,21 +20,11 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Start Date</ion-label>
-      <ion-datetime formControlName="startDate" display-format="DD/MM/YYYY" picker-format="DD MMMM YYYY"></ion-datetime>
-    </ion-item>
-    <ion-list-header>
-      <ion-label>Session Information</ion-label>
-    </ion-list-header>
-    <ion-item>
-      <ion-label position="stacked">{{classForm.value.duration}} Total {{classForm.value.duration > 1 ? 'Sessions' : 'Session'}}</ion-label>
-      <ion-range formControlName="duration" min="1" max="24" step="1" snaps="true" color="primary"></ion-range>
-    </ion-item>
-    <ion-item *ngIf="classForm.value.duration > 1">
-      <ion-label>Over Weeks</ion-label>
+      <ion-datetime formControlName="startDate" display-format="DD/MM/YYYY" picker-format="DD MMMM YYYY" ></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-button slot="start" (click)="close()">Cancel</ion-button>
-      <ion-button slot="end" [disabled]="!classForm.valid">Save</ion-button>
+      <ion-button slot="end" [disabled]="!classForm.valid" (click)="save()">Save</ion-button>
     </ion-item>
   </ion-list>
   </form>

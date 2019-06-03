@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>classes-detail</ion-title>
+    <ion-title>{{name}} {{code}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,7 +8,16 @@
   <form>
     <ion-list>
       <ion-item>
-        <ion-input value="{{class.name}}"></ion-input>
+        <ion-label position="stacked">Class Name</ion-label>
+        <ion-input [readonly]="!editing" value="{{name}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Class Code</ion-label>
+        <ion-input [readonly]="!editing" value="{{code}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Class Start Time</ion-label>
+        <ion-datetime value="{{startDate.toDate() | date: 'EEEE, dd/LLL/yyyy' }}" display-format="DD/MM/YYYY" picker-format="DD MMMM YYYY"></ion-datetime>
       </ion-item>
     </ion-list>
   </form>

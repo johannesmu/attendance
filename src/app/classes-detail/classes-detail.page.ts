@@ -8,7 +8,11 @@ import { Class } from '../models/class.model';
   styleUrls: ['./classes-detail.page.scss'],
 })
 export class ClassesDetailPage implements OnInit {
-  class:Class;
+  name:string;
+  code:string;
+  startDate:Date;
+  duration:number;
+  editing:boolean = false;
   constructor(
     private modalController:ModalController
   ) { }

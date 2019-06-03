@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Class } from '../app/models/class.model';
-import { Observable } from 'rxjs';
+import { Observable, Timestamp } from 'rxjs';
+
 
 
 @Injectable({
@@ -24,5 +25,8 @@ export class DataService {
     this.classesCollection = this.afStore.collection<Class>( path );
     this.classes = this.classesCollection.valueChanges();
     return this.classes;
+  }
+  addClass( classObj:Class ){
+    this.classesCollection.add( classObj );
   }
 }

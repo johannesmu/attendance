@@ -35,14 +35,32 @@ export class ClassesPage implements OnInit {
     const modal = await this.modalController.create({
       component: ClassesAddPage,
     });
-    modal.onDidDismiss().then((data) => {
-      console.log( data );
+    modal.onDidDismiss().then( (response) => {
+      if( response.data ){
+        let classObj:Class = response.data;
+        if( classObj.name && classObj.code ){
+          this.createClass( classObj );
+        }
+      }      
     });
-    
     return await modal.present();
   }
   
-  async classDetail(){
-
+  async classDetail( classObj ){
+    const modal = await this.modalController.create({
+      component: ClassesDetailPage,
+      componentProps: {
+        'name': classObj.name,
+        'code' : classObj.code,
+        'startDate' : classObj.startDate,
+        'duration' : classObj.duration
+      }
+    });
+    return await modal.present();
+  }
+  createClass( classObj ){
+    let date = new Date( classObj.startDate );
+    classObj.startDate = date;
+    this.dataService.addClass(classObj);
   }
 }

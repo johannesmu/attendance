@@ -1,6 +1,6 @@
 export interface Class{
   code: string,
   name: string,
-  startDate: number,
+  startDate: Date,
   Duration: number
 }
