@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Class } from '../models/class.model';
 
 @Component({
@@ -14,10 +15,16 @@ export class ClassesDetailPage implements OnInit {
   duration:number;
   editing:boolean = false;
   constructor(
-    private modalController:ModalController
+    private modalController:ModalController,
+    private formBuilder:FormBuilder
   ) { }
 
   ngOnInit() {
   }
-
+  close(){
+    this.modalController.dismiss();
+  }
+  toggleEditing(){
+    this.editing = this.editing ? false : true;
+  }
 }

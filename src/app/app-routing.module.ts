@@ -17,7 +17,8 @@ const routes: Routes = [
   { path: 'classes', loadChildren: './classes/classes.module#ClassesPageModule' },
   { path: 'sessions', loadChildren: './sessions/sessions.module#SessionsPageModule' },
   { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },  { path: 'classes-add', loadChildren: './classes-add/classes-add.module#ClassesAddPageModule' },
-  { path: 'classes-detail', loadChildren: './classes-detail/classes-detail.module#ClassesDetailPageModule' }
+  { path: 'classes-detail', loadChildren: './classes-detail/classes-detail.module#ClassesDetailPageModule' },
+  { path: 'students', loadChildren: './students/students.module#StudentsPageModule' }
 
 ];
 

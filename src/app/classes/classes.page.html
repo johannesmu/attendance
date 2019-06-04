@@ -16,16 +16,26 @@
 
   <ion-list>
     <ion-item *ngFor="let class of classes | async" lines="full" detailIcon="true" (click)="classDetail(class)">
-      <ion-label> 
-        <p>{{class.name}}</p>
+      <ion-label slot="start"> 
+        <h3>{{class.name}}</h3>
         <ion-note>{{class.code}}</ion-note>
+        <p>
+          Starts {{class.startDate.toDate() | date: "EE, dd/LLL/yyyy"}}
+        </p>
       </ion-label>
-      <ion-label>
-        <p>starts on</p>
-        <ion-note>
-            {{class.startDate.toDate() | date: "EEEE, dd/LLL/yyyy"}}
-        </ion-note>
-      </ion-label>
+      <ion-toolbar slot="end">
+        <ion-buttons>
+          <ion-button>
+            <ion-icon name="contacts"></ion-icon>
+          </ion-button>
+          <ion-button>
+            <ion-icon name="timer"></ion-icon>
+          </ion-button>
+          <ion-button>
+            <ion-icon name="create"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
     </ion-item>
   </ion-list>
 </ion-content>

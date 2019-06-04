@@ -9,15 +9,29 @@
     <ion-list>
       <ion-item>
         <ion-label position="stacked">Class Name</ion-label>
-        <ion-input [readonly]="!editing" value="{{name}}"></ion-input>
+        <ion-input [readonly]="!editing" value="{{name}}" [color]="editing ? 'secondary' : ''"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Class Code</ion-label>
-        <ion-input [readonly]="!editing" value="{{code}}"></ion-input>
+        <ion-input [readonly]="!editing" value="{{code}}" [color]="editing ? 'secondary' : ''"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="stacked">Class Start Time</ion-label>
-        <ion-datetime value="{{startDate.toDate() | date: 'EEEE, dd/LLL/yyyy' }}" display-format="DD/MM/YYYY" picker-format="DD MMMM YYYY"></ion-datetime>
+        <ion-label position="stacked">Class Start Date</ion-label>
+        <!-- use toDate() to convert Firebase timestamp to a javascript date object -->
+        <ion-datetime value="{{startDate.toDate() | date: 'EEEE, dd/LLL/yyyy' }}" display-format="DD/MM/YYYY" picker-format="DD MMMM YYYY" [readonly]="!editing"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <div class="form-buttons">
+          <ion-button (click)="close()">Close</ion-button>
+          <ion-button (click)="toggleEditing()" [color]="editing ? 'secondary' : 'primary'">Edit</ion-button>
+          <ion-button [disabled]="!editing" [color]="editing ? 'secondary' : 'primary'">Save</ion-button>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="form-buttons">
+          <ion-button>Class Students</ion-button>
+          <ion-button>Class Sessions</ion-button>
+        </div>
       </ion-item>
     </ion-list>
   </form>
