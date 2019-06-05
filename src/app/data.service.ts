@@ -29,4 +29,7 @@ export class DataService {
   addClass( classObj:Class ){
     this.classesCollection.add( classObj );
   }
+  updateClass(){
+    //update the class object in Firestore
+  }
 }
