@@ -14,17 +14,26 @@ export class ClassesDetailPage implements OnInit {
   startDate:Date;
   duration:number;
   editing:boolean = false;
+  classForm:FormGroup;
   constructor(
     private modalController:ModalController,
     private formBuilder:FormBuilder
   ) { }
 
   ngOnInit() {
+    this.formBuilder.group({
+      name: [this.name ,[ Validators.required, Validators.minLength(3) ]],
+      code:[this.code ,[ Validators.required, Validators.minLength(6) ]],
+      startDate: [ this.startDate , [Validators.required ]]
+     });
   }
   close(){
     this.modalController.dismiss();
   }
   toggleEditing(){
     this.editing = this.editing ? false : true;
+  }
+  save(){
+
   }
 }

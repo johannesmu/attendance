@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Class } from '../app/models/class.model';
-import { Observable, Timestamp } from 'rxjs';
+import { Observable } from 'rxjs';
 
 
 
