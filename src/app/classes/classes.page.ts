@@ -63,4 +63,7 @@ export class ClassesPage implements OnInit {
     classObj.startDate = date;
     this.dataService.addClass(classObj);
   }
+  updateClass(){
+    
+  }
 }
