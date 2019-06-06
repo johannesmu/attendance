@@ -18,7 +18,9 @@ const routes: Routes = [
   { path: 'sessions', loadChildren: './sessions/sessions.module#SessionsPageModule' },
   { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },  { path: 'classes-add', loadChildren: './classes-add/classes-add.module#ClassesAddPageModule' },
   { path: 'classes-detail', loadChildren: './classes-detail/classes-detail.module#ClassesDetailPageModule' },
-  { path: 'students', loadChildren: './students/students.module#StudentsPageModule' }
+  { path: 'students', loadChildren: './students/students.module#StudentsPageModule' },
+  { path: 'class-sessions', loadChildren: './class-sessions/class-sessions.module#ClassSessionsPageModule' },
+  { path: 'class-students', loadChildren: './class-students/class-students.module#ClassStudentsPageModule' }
 
 ];
 

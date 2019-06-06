@@ -1,7 +1,15 @@
+// import variables from theme
+@import '../../theme/variables.scss';
+
 .form-buttons{
   width: 100%;
   display: flex;
   ion-button{
     flex: 1;
+  }
+}
+ion-item{
+  ion-datetime{
+    --color: var(--ionic-color-secondary);
   }
 }

@@ -65,6 +65,11 @@ export class AppComponent {
             icon: 'apps'
           },
           {
+            title: 'Students',
+            url: '/students',
+            icon: 'contacts'
+          },
+          {
             title: 'Sessions',
             url: '/sessions',
             icon: 'time'

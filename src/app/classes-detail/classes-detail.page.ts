@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Class } from '../models/class.model';
@@ -14,18 +15,29 @@ export class ClassesDetailPage implements OnInit {
   startDate:Date;
   duration:number;
   editing:boolean = false;
+  classObject = {name: this.name, code: this.code, duration: this.duration, startDate: this.startDate };
   classForm:FormGroup;
+  formChanged:boolean = false;
   constructor(
     private modalController:ModalController,
-    private formBuilder:FormBuilder
+    private formBuilder:FormBuilder,
+    private router:Router
   ) { }
 
   ngOnInit() {
-    this.formBuilder.group({
+    this.classForm = this.formBuilder.group({
       name: [this.name ,[ Validators.required, Validators.minLength(3) ]],
       code:[this.code ,[ Validators.required, Validators.minLength(6) ]],
       startDate: [ this.startDate , [Validators.required ]]
      });
+    this.classForm.valueChanges.subscribe((formValues) =>{
+      if( this.classForm.valid ){
+        this.formChanged = true;
+      }
+      else{
+        this.formChanged = false;
+      }
+    });
   }
   close(){
     this.modalController.dismiss();
@@ -35,5 +47,14 @@ export class ClassesDetailPage implements OnInit {
   }
   save(){
 
+  }
+
+  openStudents(){
+    this.close();
+    this.router.navigate(['/students']);
+  }
+  openSessions(){
+    this.close();
+    this.router.navigate(['/students']);
   }
 }

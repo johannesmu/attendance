@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Class } from '../app/models/class.model';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 
@@ -23,7 +24,17 @@ export class DataService {
   getClasses( uid ){
     let path = `users/${uid}/classes/`;
     this.classesCollection = this.afStore.collection<Class>( path );
-    this.classes = this.classesCollection.valueChanges();
+    this.classes = this.classesCollection.snapshotChanges().pipe(
+      map(
+        actions => actions.map(
+          values => {
+            const data = values.payload.doc.data() as Class;
+            const id = values.payload.doc.id;
+            return {id, ...data };
+          }
+        )
+      )
+    );
     return this.classes;
   }
   addClass( classObj:Class ){
