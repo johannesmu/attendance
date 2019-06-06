@@ -51,10 +51,10 @@ export class ClassesDetailPage implements OnInit {
 
   openStudents(){
     this.close();
-    this.router.navigate(['/students']);
+    this.router.navigate(['/class-students']);
   }
   openSessions(){
     this.close();
-    this.router.navigate(['/students']);
+    this.router.navigate(['/class-sessions']);
   }
 }

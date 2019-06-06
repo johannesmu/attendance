@@ -27,8 +27,10 @@ export class ClassesPage implements OnInit {
     this.authService.authState.subscribe(( user ) => {
       if( user ){
         this.classes = this.dataService.getClasses( user.uid );
+        this.classes.subscribe( values => console.log(values));
       }
     });
+    
   }
 
   async addClass(){
@@ -64,6 +66,6 @@ export class ClassesPage implements OnInit {
     this.dataService.addClass(classObj);
   }
   updateClass(){
-    
+
   }
 }
