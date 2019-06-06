@@ -40,7 +40,14 @@ export class DataService {
   addClass( classObj:Class ){
     this.classesCollection.add( classObj );
   }
-  updateClass(){
+  updateClass(classId:string,classObj:Class){
     //update the class object in Firestore
+    this.classesCollection.doc(classId).update(classObj)
+    .then((res) => {
+      //success
+    })
+    .catch((err)=> {
+      //error
+    })
   }
 }
