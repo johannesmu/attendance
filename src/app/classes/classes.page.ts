@@ -52,12 +52,19 @@ export class ClassesPage implements OnInit {
     const modal = await this.modalController.create({
       component: ClassesDetailPage,
       componentProps: {
+        'id': classObj.id,
         'name': classObj.name,
         'code' : classObj.code,
         'startDate' : classObj.startDate,
         'duration' : classObj.duration
       }
     });
+    modal.onDidDismiss().then((response) => {
+      // console.log( response );
+      if( response.data !== undefined ){
+        this.dataService.updateClass(response.data);
+      }
+    })
     return await modal.present();
   }
   createClass( classObj ){

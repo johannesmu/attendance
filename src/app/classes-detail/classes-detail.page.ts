@@ -14,6 +14,7 @@ export class ClassesDetailPage implements OnInit {
   code:string;
   startDate:Date;
   duration:number;
+  id:string;
   editing:boolean = false;
   classObject = {name: this.name, code: this.code, duration: this.duration, startDate: this.startDate };
   classForm:FormGroup;
@@ -26,6 +27,7 @@ export class ClassesDetailPage implements OnInit {
 
   ngOnInit() {
     this.classForm = this.formBuilder.group({
+      id: [this.id, [Validators.nullValidator] ],
       name: [this.name ,[ Validators.required, Validators.minLength(3) ]],
       code:[this.code ,[ Validators.required, Validators.minLength(6) ]],
       startDate: [ this.startDate , [Validators.required ]]
@@ -46,7 +48,7 @@ export class ClassesDetailPage implements OnInit {
     this.editing = this.editing ? false : true;
   }
   save(){
-
+    this.modalController.dismiss( this.classForm.value );
   }
 
   openStudents(){
