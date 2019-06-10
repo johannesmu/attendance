@@ -4,6 +4,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Class } from '../app/models/class.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Session } from '../app/models/session.model';
 
 
 
@@ -12,7 +13,9 @@ import { map } from 'rxjs/operators';
 })
 export class DataService {
   classesCollection:AngularFirestoreCollection<Class>;
-  classes:Observable<Class[]>
+  classes:Observable<Class[]>;
+  sessionsCollection:AngularFirestoreCollection<Session>;
+  sessions$:Observable<Session>;
   constructor(
     private afStore:AngularFirestore
     
@@ -50,5 +53,9 @@ export class DataService {
     .catch((err)=> {
       //error
     })
+  }
+  getClassSessions( uid, classId ){
+    let path = `users/${uid}/classes/${classId}/sessions`;
+    this.classesCollection = this.afStore.collection<Session>( path );
   }
 }

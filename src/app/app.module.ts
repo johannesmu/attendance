@@ -17,6 +17,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { ClassesDetailPageModule } from './classes-detail/classes-detail.module';
 import { ClassesAddPageModule } from './classes-add/classes-add.module';
+import { ClassSessionsPageModule } from './class-sessions/class-sessions.module';
 // import { ClasscodePipe } from './classcode.pipe';
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ClassesAddPageModule } from './classes-add/classes-add.module';
     AngularFireDatabaseModule,
     AngularFirestoreModule,
     ClassesDetailPageModule,
-    ClassesAddPageModule
+    ClassesAddPageModule,
+    ClassSessionsPageModule
   ],
   providers: [
     StatusBar,

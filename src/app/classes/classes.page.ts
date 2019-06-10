@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { ModalController } from '@ionic/angular';
 import { ClassesDetailPage } from '../classes-detail/classes-detail.page';
 import { ClassesAddPage } from '../classes-add/classes-add.page';
+import { ClassSessionsPage } from '../class-sessions/class-sessions.page';
 
 
 @Component({
@@ -72,7 +73,16 @@ export class ClassesPage implements OnInit {
     classObj.startDate = date;
     this.dataService.addClass(classObj);
   }
-  updateClass(){
-
+  async goToSession( classObj ){
+    const modal = await this.modalController.create({
+      component: ClassSessionsPage,
+      componentProps: {
+        'id': classObj.id,
+        'name': classObj.name,
+        'code' : classObj.code,
+        'startDate' : classObj.startDate
+      }
+    });
+    return await modal.present();
   }
 }

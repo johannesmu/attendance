@@ -13,3 +13,10 @@
 .profile-image{
   max-width:40px;
 }
+.form-buttons{
+  width: 100%;
+  display: flex;
+  ion-button{
+    flex: 1;
+  }
+}
