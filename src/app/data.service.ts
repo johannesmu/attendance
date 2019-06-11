@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Class } from '../app/models/class.model';
-import { Observable } from 'rxjs';
+
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 import { Session } from '../app/models/session.model';
+import { Class } from '../app/models/class.model';
+import { Student } from '../app/models/student.model';
 
 
 
@@ -12,22 +14,28 @@ import { Session } from '../app/models/session.model';
   providedIn: 'root'
 })
 export class DataService {
-  classesCollection:AngularFirestoreCollection<Class>;
-  classes:Observable<Class[]>;
+  currentClass$ = new BehaviorSubject<Class>();
+  currentSession$ = new BehaviorSubject<Session>();
+  //classes
+  classesCollection: AngularFirestoreCollection<Class>;
+  classes$:Observable<Class[]>;
+  //sessions
   sessionsCollection:AngularFirestoreCollection<Session>;
   sessions$:Observable<Session>;
+  //students
+  studentsCollection: AngularFirestoreCollection<Student>;
   constructor(
     private afStore:AngularFirestore
     
   ) { }
 
-  getSessions(){
-    
+  setCurrentClass(classObj:Class){
+    this.currentClass$.next( classObj );
   }
   getClasses( uid ){
     let path = `users/${uid}/classes/`;
     this.classesCollection = this.afStore.collection<Class>( path );
-    this.classes = this.classesCollection.snapshotChanges().pipe(
+    this.classes$ = this.classesCollection.snapshotChanges().pipe(
       map(
         actions => actions.map(
           values => {
@@ -38,7 +46,7 @@ export class DataService {
         )
       )
     );
-    return this.classes;
+    return this.classes$;
   }
   addClass( classObj:Class ){
     this.classesCollection.add( classObj );
@@ -56,6 +64,19 @@ export class DataService {
   }
   getClassSessions( uid, classId ){
     let path = `users/${uid}/classes/${classId}/sessions`;
-    this.classesCollection = this.afStore.collection<Session>( path );
+    this.sessionsCollection = this.afStore.collection<Session>( path );
+    this.sessions$ = this.sessionsCollection.snapshotChanges().pipe(
+      map(
+        actions => actions.map(
+          values => {
+            const data = values.payload.doc.data() as Session;
+            const id = values.payload.doc.id;
+            console.log({ id, ...data});
+            return {id, ...data };
+          }
+        )
+      )
+    );
+    return this.sessions$;
   }
 }

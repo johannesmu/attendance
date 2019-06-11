@@ -20,7 +20,8 @@ const routes: Routes = [
   { path: 'classes-detail', loadChildren: './classes-detail/classes-detail.module#ClassesDetailPageModule' },
   { path: 'students', loadChildren: './students/students.module#StudentsPageModule' },
   { path: 'class-sessions', loadChildren: './class-sessions/class-sessions.module#ClassSessionsPageModule' },
-  { path: 'class-students', loadChildren: './class-students/class-students.module#ClassStudentsPageModule' }
+  { path: 'class-students', loadChildren: './class-students/class-students.module#ClassStudentsPageModule' },
+  { path: 'class-session-add', loadChildren: './class-session-add/class-session-add.module#ClassSessionAddPageModule' }
 
 ];
 

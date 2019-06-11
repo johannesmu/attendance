@@ -5,30 +5,28 @@
 </ion-header>
 
 <ion-content>
-  <ion-item> 
-    <ion-label>Class Name</ion-label>
-    <ion-label> {{name}}</ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-label>Class Code</ion-label>
-    <ion-label>{{code}}</ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-label>Start Date</ion-label>
-    <ion-label>{{startDate.toDate() | date: "EE, dd/LLL/yyyy" }}</ion-label>
-  </ion-item>
+  <ion-list>
+    <ion-list-header>
+      <h3>Sessions for {{name}}</h3>
+    </ion-list-header>
+    <ion-list-header>
+      <p>{{code}} Starts {{startDate.toDate() | date: "EE, dd/LLL/yyyy" }}</p>
+    </ion-list-header>
+    <ion-item *ngFor="let session of sessions$ | async">
+      <ion-label>{{session.date.toDate() | date: "EE, dd/LLL/yyyy" }} {{session.startTime}} - {{session.endTime}}</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
 <ion-footer>
-  <ion-toolbar color="secondary">
-    <ion-buttons>
-      <ion-button>
-        Auto Generate
-      </ion-button>
-      <ion-button>
-        Add
-      </ion-button>
-      <ion-button>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
         Close
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="addSession()">
+        Add Session
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

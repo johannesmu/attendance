@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Student } from '../models/student.model';
+import { ModalController, AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
-
+import { DataService } from '../data.service';
+import { AuthService } from '../auth.service';
 import { Session } from '../models/session.model';
 
 @Component({
@@ -16,11 +17,36 @@ export class ClassSessionsPage implements OnInit {
   code:string;
   startDate:Date;
   sessions$:Observable<Session>;
-  constructor() { }
+  constructor(
+    private modalController:ModalController,
+    private alertController:AlertController,
+    private dataService:DataService,
+    private authService:AuthService
+  ) { }
 
   ngOnInit() {
+    this.authService.authState.subscribe( (user) => {
+      if( user ){
+        this.getSessions( user.uid, this.id );
+      }
+    })
   }
-  getSessions(){
-
+  getSessions( uid, classId ){
+    this.sessions$ = this.dataService.getClassSessions( uid, classId );
+  }
+  close(){
+    this.modalController.dismiss();
+  }
+  async addSession(){
+    const alert = await this.alertController.create({
+      header: 'Add Sessions',
+      inputs:[
+        { name: 'test',
+          type: 'datetime',
+          label: 'Date'
+        }
+      ]
+    });
+    await alert.present();
   }
 }

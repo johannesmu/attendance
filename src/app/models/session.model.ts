@@ -1,5 +1,6 @@
+import { Student } from '../models/student.model';
 export interface Session{
-  sid:string,
+  id:string,
   startTime:Date,
   endTime:Date,
   attendees:Array<Student>
