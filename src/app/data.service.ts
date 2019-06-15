@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Session } from '../app/models/session.model';
@@ -14,14 +14,13 @@ import { Student } from '../app/models/student.model';
   providedIn: 'root'
 })
 export class DataService {
-  currentClass$ = new BehaviorSubject<Class>();
-  currentSession$ = new BehaviorSubject<Session>();
+  currentClassId$:BehaviorSubject<string> = new BehaviorSubject('');
   //classes
   classesCollection: AngularFirestoreCollection<Class>;
-  classes$:Observable<Class[]>;
+  classes$:BehaviorSubject<Class[]> = new BehaviorSubject([]);
   //sessions
   sessionsCollection:AngularFirestoreCollection<Session>;
-  sessions$:Observable<Session>;
+  sessions$:Observable<Session[]>;
   //students
   studentsCollection: AngularFirestoreCollection<Student>;
   constructor(
@@ -30,12 +29,13 @@ export class DataService {
   ) { }
 
   setCurrentClass(classObj:Class){
-    this.currentClass$.next( classObj );
+    this.currentClassId$.next( classObj.id );
   }
+  
   getClasses( uid ){
     let path = `users/${uid}/classes/`;
     this.classesCollection = this.afStore.collection<Class>( path );
-    this.classes$ = this.classesCollection.snapshotChanges().pipe(
+    let classData = this.classesCollection.snapshotChanges().pipe(
       map(
         actions => actions.map(
           values => {
@@ -46,8 +46,9 @@ export class DataService {
         )
       )
     );
-    return this.classes$;
+    classData.subscribe((values) => { this.classes$.next(values) });
   }
+  
   addClass( classObj:Class ){
     this.classesCollection.add( classObj );
   }
@@ -57,9 +58,11 @@ export class DataService {
     this.classesCollection.doc(classObj.id).update({name: classObj.name, code: classObj.code, startDate: classObj.startDate })
     .then((res) => {
       //success
+      console.log(res);
     })
     .catch((err)=> {
       //error
+      console.log(err);
     })
   }
   getClassSessions( uid, classId ){
@@ -71,7 +74,6 @@ export class DataService {
           values => {
             const data = values.payload.doc.data() as Session;
             const id = values.payload.doc.id;
-            console.log({ id, ...data});
             return {id, ...data };
           }
         )

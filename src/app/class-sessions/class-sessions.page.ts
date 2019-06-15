@@ -16,7 +16,7 @@ export class ClassSessionsPage implements OnInit {
   name:string;
   code:string;
   startDate:Date;
-  sessions$:Observable<Session>;
+  sessions$:Observable<Session[]>;
   constructor(
     private modalController:ModalController,
     private alertController:AlertController,
@@ -42,7 +42,7 @@ export class ClassSessionsPage implements OnInit {
       header: 'Add Sessions',
       inputs:[
         { name: 'test',
-          type: 'datetime',
+          type: 'date',
           label: 'Date'
         }
       ]

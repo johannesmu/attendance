@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar >
     <ion-title slot="start">
-      <ion-label >{{ editing ? 'Editing' : 'Detail of'}} {{name}}</ion-label> 
+      <ion-label >{{ editing ? 'Editing' : 'Detail of'}} {{currentClass.name }}</ion-label> 
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,34 +10,18 @@
   
   <form [formGroup]="classForm">
     <ion-list>
-      <!-- <ion-item button="true" detail="true" color="primary" (click)="openStudents()">
-        <ion-icon slot="start" name="contacts"></ion-icon>
-        <ion-label slot="end">Students</ion-label>
-      </ion-item>
-      <ion-item button="true" detail="true" color="secondary" (click)="openSessions()">
-        <ion-icon slot="start" name="time"></ion-icon>
-        <ion-label slot="end">Sessions</ion-label>
-      </ion-item> -->
-      <ion-item>
+      <ion-item color="(editing) ? 'primary' : 'secondary'">
         <ion-label position="stacked">Class Name</ion-label>
-        <ion-input type="hidden" formControlName="id" value="{{id}}"></ion-input>
-        <ion-input [readonly]="!editing" formControlName="name" value="{{name}}" [color]="editing ? 'secondary' : ''"></ion-input>
+        <ion-input type="text" formControlName="id"></ion-input>
+        <ion-input type="text" formControlName="name" [readonly]="!editing"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Class Code</ion-label>
-        <ion-input [readonly]="!editing" formControlName="code" value="{{code}}" [color]="editing ? 'secondary' : ''"></ion-input>
+        <ion-input type="text" formControlName="code" value="{{currentClass.code}}" [readonly]="!editing"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="stacked">Class Start Date</ion-label>
-        <!-- use toDate() to convert Firebase timestamp to a javascript date object -->
-        <ion-datetime class="editing ? 'write' : 'read'" formControlName="startDate" value="{{startDate.toDate() | date: 'EEEE, dd/LLL/yyyy' }}" display-format="DD/MM/YYYY" picker-format="DD MMMM YYYY" [readonly]="!editing"></ion-datetime>
-      </ion-item>
-      <ion-item>
-        <div class="form-buttons">
-          
-          
-          
-        </div>
+        <ion-label position="stacked">Start Date</ion-label>
+        <ion-datetime formControlName="startDate" value="{{currentClass.startDate.toDate() | date: 'EEEE, dd/LLL/yyyy' }}" [readonly]="!editing" display-format="DD/MM/YYYY" picker-format="DD MMMM YYYY" ></ion-datetime>
       </ion-item>
     </ion-list>
   </form>
@@ -45,13 +29,13 @@
 <ion-footer>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-button (click)="close()">{{!editing ? 'Close' : 'Cancel'}}</ion-button>
+      <ion-button (click)="close()">{{(editing) ? 'Cancel' : 'Close'}}</ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button (click)="toggleEditing()" *ngIf="!editing">Edit</ion-button>
+      <ion-button (click)="toggleEdit()" *ngIf="!editing">Edit</ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button [disabled]="!formChanged && !editing" (click)="save()" *ngIf="editing">Save</ion-button>
+      <ion-button (click)="save()" *ngIf="editing">Save</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

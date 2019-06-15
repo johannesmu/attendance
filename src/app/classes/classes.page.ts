@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 
 import { DataService } from '../data.service';
 import { AuthService } from '../auth.service';
 import { Class } from '../models/class.model';
-import { Observable } from 'rxjs';
+
 import { ModalController } from '@ionic/angular';
-import { ClassesDetailPage } from '../classes-detail/classes-detail.page';
+
 import { ClassesAddPage } from '../classes-add/classes-add.page';
 import { ClassSessionsPage } from '../class-sessions/class-sessions.page';
 
@@ -17,21 +17,24 @@ import { ClassSessionsPage } from '../class-sessions/class-sessions.page';
   styleUrls: ['./classes.page.scss'],
 })
 export class ClassesPage implements OnInit {
-  classes:Observable<Class[]>;
+  classes:Array<Class>;
   constructor(
     private dataService:DataService,
     private authService:AuthService,
-    private modalController:ModalController
+    private modalController:ModalController,
+    private router: Router
   ) { }
 
   ngOnInit() {
+    
     this.authService.authState.subscribe(( user ) => {
       if( user ){
-        this.classes = this.dataService.getClasses( user.uid );
-        // this.classes.subscribe( values => console.log(values));
+        this.dataService.classes$.subscribe((classes) => {
+          this.classes = classes;
+        });
+        this.dataService.getClasses( user.uid );
       }
     });
-    
   }
 
   async addClass(){
@@ -50,23 +53,8 @@ export class ClassesPage implements OnInit {
   }
   
   async classDetail( classObj ){
-    const modal = await this.modalController.create({
-      component: ClassesDetailPage,
-      componentProps: {
-        'id': classObj.id,
-        'name': classObj.name,
-        'code' : classObj.code,
-        'startDate' : classObj.startDate,
-        'duration' : classObj.duration
-      }
-    });
-    modal.onDidDismiss().then((response) => {
-      // console.log( response );
-      if( response.data !== undefined ){
-        this.dataService.updateClass(response.data);
-      }
-    })
-    return await modal.present();
+    this.dataService.setCurrentClass( classObj );
+    this.router.navigate(['/classes-detail',{ returnTo: '/classes'}]);
   }
   createClass( classObj ){
     let date = new Date( classObj.startDate );

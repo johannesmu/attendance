@@ -15,7 +15,7 @@
   </ion-fab>
 
   <ion-list>
-    <ion-item *ngFor="let class of classes | async" lines="full" detailIcon="true">
+    <ion-item *ngFor="let class of classes" lines="full" detailIcon="true">
       <ion-label slot="start"> 
         <h3>{{class.name}}</h3>
         <ion-note>{{class.code}}</ion-note>
